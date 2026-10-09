@@ -11,9 +11,9 @@ source .venv/bin/activate
 streamlit run app.py --server.address 127.0.0.1
 ```
 
-页面选择“多语言语义”或“关键词与语义融合”，提问“提出的方法在测试集上准确率是多少？”。示例会展示含 91.2% 的虚构表格及 PDF 来源区域；默认展示原文证据，不生成中文总结。
+页面默认打开 CLIP。没有本地 PDF 时，先点击“下载真实论文并开始”，再点击“CLIP 的 ImageNet 准确率”；首次解析后直接显示数值和来源。也可填写方法与指标标签查表，分组指标用完整路径，遇到多个来源自行选择。此流程不需要下载语义权重，不调用生成模型。
 
-检索表格后，勾选右侧“定位表格单元格”，选择 Proposed 行和 Accuracy 列。页面从源单元格读取数值，分别标出行名、表头和该值，并可导出坐标 JSON。当前适合首行表头、首列行名的简单表格；合并或多行单元格会提示无法可靠绑定。旧索引需重新执行 `ingest` 才有单元格坐标。
+右侧单元格检查可以选择行列、核对原页高亮并导出坐标 JSON。表格的分组表头只有具备明确横线几何证据时才绑定；复杂跨列和多行单元格需要人工核查。schema 1/2 索引仍能读取，但需重新 `ingest` 才能得到 schema 3 的表头来源路径。官方 PDF 下载失败可上传自己的文本 PDF，或选择侧栏的虚构示例。
 
 ## 在新电脑上准备语义检索
 
@@ -82,4 +82,4 @@ python eval/verify_local_embedding.py
 
 单元测试用确定性的测试向量和离线 API 响应，不依赖下载模型。两个语义脚本使用真实本地 E5 模型：前者比较相同分块下的三种检索器，后者检查长文本窗口与原来源保留。详情见 [验证记录](VERIFICATION.zh-CN.md)。
 
-真实论文检索开发集的命令是 `python scripts/fetch_real_papers.py` 与 `python eval/real_eval.py`。下载后重启页面，在“示例论文”中可选三篇真实论文。表格引用仍按单层表头假设，复杂表头与扫描件需另行解析；方法选择与后续验收见 [真实评测报告](REAL-EVAL.zh-CN.md)。
+真实论文开发集下载命令为 `python scripts/fetch_real_papers.py`；评测请使用单独输出路径，如 `python eval/real_eval.py --out eval/real/v0.5-development-results.json`。NLP 当前开发协议与复现命令见 [本轮报告](TABLE-WORKFLOW.zh-CN.md)。历史固定代码协议会拒绝当前修改后的解析器。

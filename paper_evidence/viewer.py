@@ -55,20 +55,22 @@ def show_page(source, page):
     st.image(preview,caption=f"PDF 第 {page} 页 · 完整原文",width="stretch")
 
 
-def inspect_source(source, chunk, *, binding=None, key_prefix="search"):
+def inspect_source(source, chunk, *, binding=None, key_prefix="search", locked=False):
     key = f"{key_prefix}-{chunk.document_id}-{chunk.id}"
+    if binding:
+        key += f"-{binding['row']}-{binding['column']}"
     boxes = None
-    if chunk.table and st.checkbox("定位表格单元格",value=bool(binding),key=f"inspect-{key}"):
-        st.caption("第 1 行作为表头，第 1 列作为行名。复杂或合并表头需人工核对。")
+    if chunk.table and st.checkbox("定位表格单元格",value=bool(binding),key=f"inspect-{key}",disabled=locked):
+        st.caption("按解析行名和完整表头路径定位；分组表头会一并高亮。跨列或缺少来源的单元格不提供数值引用。")
         choices = [r for r in range(1,len(chunk.table.rows)) if bindable_columns(chunk,r)]
         if choices:
             row = st.selectbox("数据行",choices,
                 index=choices.index(binding["row"]) if binding and binding["row"] in choices else 0,
-                format_func=lambda r:f"第 {r+1} 行 · {' / '.join(c.text for c in chunk.table.rows[r][:2])}",key=f"row-{key}")
+                format_func=lambda r:f"第 {r+1} 行 · {' / '.join(c.text for c in chunk.table.rows[r][:2])}",key=f"row-{key}",disabled=locked)
             columns = bindable_columns(chunk,row)
             column = st.selectbox("数值列",columns,
                 index=columns.index(binding["column"]) if binding and binding["column"] in columns else 0,
-                format_func=lambda c:f"第 {c+1} 列 · {chunk.table.rows[0][c].text}",key=f"column-{key}")
+                format_func=lambda c:f"第 {c+1} 列 · {chunk.table.rows[0][c].text}",key=f"column-{key}",disabled=locked)
             reference = cell_reference(chunk,row,column)
             st.success(table_value_claim(chunk,row,column)["text"])
             boxes = reference["boxes"]

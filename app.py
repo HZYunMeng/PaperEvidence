@@ -11,7 +11,9 @@ from paper_evidence.retrieval import BM25
 from paper_evidence.config import load_settings
 from paper_evidence.cloud import CompatibleGenerator
 from paper_evidence.semantic import E5Embedder, default_model_path, make_retriever
-from paper_evidence.corpus import local_examples, verified_pdf
+from paper_evidence.corpus import local_examples, verified_pdf, load_manifest, download_paper
+from paper_evidence.demo import PRESETS
+from paper_evidence.tables import find_cells, label_key
 from paper_evidence.viewer import inspect_source, show_page, show_text, source_label
 from paper_evidence import __version__
 
@@ -24,15 +26,17 @@ except Exception as exc:
 
 st.set_page_config(page_title="PaperEvidence · 论文证据助手", page_icon="📄", layout="wide")
 st.title("PaperEvidence · 论文证据助手")
-st.caption("上传论文，检索原文，逐条查看引用与页码。当前为早期工程原型。")
+st.caption("查论文里的实验数值，连同方法、指标和 PDF 原文一起核对。无需配置模型即可开始。")
 
 
 with st.sidebar:
     st.header("论文与模式")
-    use_sample = st.checkbox("使用内置示例 PDF", value=True)
-    examples = {"虚构演示论文":(Path(__file__).parent / "examples/demo-paper.pdf",None)}
+    use_sample = st.checkbox("使用示例论文", value=True)
+    featured = next(p for p in load_manifest(Path(__file__).parent / "eval/real/papers.json") if p["id"]=="clip")
+    examples = {"clip · 真实论文":(Path(__file__).parent / "data/real-papers/clip.pdf",featured)}
     downloaded, integrity_errors = local_examples(Path(__file__).parent)
     examples.update(downloaded)
+    examples["虚构演示论文"] = (Path(__file__).parent / "examples/demo-paper.pdf",None)
     for error in integrity_errors:
         st.warning(f"示例校验失败，已排除：{error}")
     example_name = st.selectbox("示例论文",list(examples),disabled=not use_sample)
@@ -53,7 +57,7 @@ with st.sidebar:
 
 
 @st.cache_data(show_spinner=False, max_entries=4)
-def ingest(data, name, parser_revision="0.4.1"):
+def ingest(data, name, parser_revision="0.5.0"):
     paper = parse_pdf(data, name)
     return paper, chunk_blocks(paper.blocks)
 
@@ -72,17 +76,36 @@ def retriever_for(chunks):
                           embedder=embedder,cache_dir=Path(__file__).parent / ".cache" / "embeddings")
 
 
-source = None
+source, item = None, None
 if use_sample:
     sample, item = examples[example_name]
-    if sample.exists():
+    valid_sample = sample.exists()
+    if item and valid_sample:
+        try:
+            verified_pdf(sample,item['sha256'])
+        except ValueError:
+            valid_sample = False
+    if valid_sample:
         source, name = (verified_pdf(sample,item["sha256"]) if item else sample.read_bytes()), sample.name
         if example_name == "虚构演示论文":
             st.warning("示例 PDF 是本项目编写的虚构论文，只用于演示解析和检索；其中数值不是科研实验结果。")
         else:
             st.caption(f"真实论文：{item['title']} · 原作者与出处见 [{item['publication']}]({item['page_url']})")
     else:
-        st.error("内置示例缺失，请上传 PDF。")
+        if item:
+            st.subheader("用真实论文试一次")
+            st.write("点击下载 CLIP 的官方 PDF，再点击一个实验指标，即可查看来源数值和高亮。无需 API Key 或模型权重。")
+            st.caption(f"来源：[论文与原作者]({item['page_url']}) · {item.get('license_note','PDF 保留原作者版权')}。只在点击后从官方出处下载并校验哈希，保存在本机。")
+            if st.button("下载真实论文并开始",type="primary"):
+                try:
+                    with st.spinner("下载并校验官方 PDF…"):
+                        download_paper(item,sample.parent)
+                    st.rerun()
+                except Exception:
+                    st.error("下载或校验未成功。可以重试、上传自己的 PDF，或在侧栏选择虚构演示论文。")
+        else:
+            st.error("演示文件缺失，请上传 PDF。")
+        st.stop()
 elif upload:
     source, name = upload.getvalue(), upload.name
 
@@ -101,6 +124,7 @@ with st.expander("查看当前解析能力与限制"):
         st.write(warning)
 if st.session_state.get("document_id") != paper.id:
     st.session_state.pop("result", None)
+    st.session_state.pop("cell_result",None)
     st.session_state["document_id"] = paper.id
 request_options = (retrieval_mode, mode, model, top_k, settings.base_url, settings.model,
                    settings.embedding_path, settings.max_tokens, settings.max_evidence_chars,
@@ -108,6 +132,55 @@ request_options = (retrieval_mode, mode, model, top_k, settings.base_url, settin
 if st.session_state.get("request_options") != request_options:
     st.session_state.pop("result", None)
     st.session_state["request_options"] = request_options
+if st.session_state.get("cell_revision") != __version__:
+    st.session_state.pop("cell_result",None)
+    st.session_state["cell_revision"] = __version__
+st.subheader("查实验数值")
+st.caption("填写表格中的方法名与指标名，直接查找可绑定的单元格。仅匹配标签，不自动推断别名或计算数值。")
+method_key,metric_key = f"method-{paper.id}",f"metric-{paper.id}"
+presets = PRESETS.get(item["id"],[]) if item else []
+if presets:
+    st.write("点一个真实例子：")
+    for column,preset in zip(st.columns(len(presets)),presets):
+        with column:
+            if st.button(preset["label"],key=f"preset-{paper.id}-{preset['method']}-{preset['metric']}"):
+                st.session_state[method_key],st.session_state[metric_key] = preset['method'],preset['metric']
+                st.session_state['cell_result'] = {'method':preset['method'],'metric':preset['metric'],
+                                                  'matches':find_cells(chunks,preset['method'],preset['metric'])}
+with st.form(f"cell-lookup-{paper.id}"):
+    method = st.text_input("方法或模型名",key=method_key,placeholder="例如：BERT BASE")
+    metric = st.text_input("指标名或完整分组路径",key=metric_key,placeholder="例如：MRPC 或 BLEU / EN-DE")
+    if st.form_submit_button("查找数值",type="primary"):
+        st.session_state['cell_result'] = {'method':method,'metric':metric,'matches':find_cells(chunks,method,metric)}
+cell_result = st.session_state.get('cell_result')
+if cell_result:
+    matches = cell_result['matches']
+    st.caption(f"本次查表：{cell_result['method']} · {cell_result['metric']}")
+    selected_ref = None
+    if not matches:
+        st.warning("没有找到可可靠绑定的匹配单元格。这不表示论文没有该数据：核对标签写法，或展开逐页浏览查看原文。")
+    elif len(matches)>1:
+        st.info(f"找到 {len(matches)} 个来源。可能存在同名行、不同表格或重复列名，请选择来源；也可填写完整分组路径缩小范围。")
+        selected_match = st.selectbox("选择数值来源",[None]+list(range(len(matches))),
+            format_func=lambda i:"请选择，尚未确定来源" if i is None else
+                f"第 {matches[i]['page']} 页 · {matches[i]['row_label']} · {matches[i]['column_label']} · {matches[i]['value']}",
+            key=f"match-{paper.id}-{label_key(cell_result['method'])}-{label_key(cell_result['metric'])}")
+        if selected_match is not None:
+            selected_ref = matches[selected_match]
+    else:
+        selected_ref = matches[0]
+    if selected_ref:
+        value_panel,pdf_panel = st.columns(2,gap="large")
+        with value_panel:
+            st.metric(selected_ref['column_label'],selected_ref['value'])
+            st.write(f"方法：{selected_ref['row_label']}")
+            st.caption(f"PDF 第 {selected_ref['page']} 页 · 数值由解析单元格读取；实验条件和单位请核对原文。")
+            st.text(selected_ref['table_caption'])
+            if selected_ref['row_context']:
+                st.json(selected_ref['row_context'])
+        with pdf_panel:
+            selected_chunk = next(c for c in chunks if c.id==selected_ref['chunk_id'])
+            inspect_source(source,selected_chunk,binding=selected_ref,key_prefix="lookup",locked=True)
 with st.expander("逐页浏览论文（无需提问）"):
     if st.checkbox("打开逐页浏览",key=f"browse-{paper.id}"):
         st.caption("查看已解析片段与完整 PDF。文字可提取不代表表格行列解析正确；未识别的表格、扫描页和图形请在原文核对。")

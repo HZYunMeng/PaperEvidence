@@ -19,12 +19,12 @@ def table_parts(block, max_chars):
 
     def render(rows):
         text = table_markdown([[c.text for c in r] for r in rows])
-        return text + ('\n'+table.caption if table.caption else '')
+        return text + ('\n'+table.caption if table.caption else '') + ('\nHeader notes: '+table.header_notes if table.header_notes else '')
 
     def flush():
         if len(pending) < 2:
             return
-        structure = TableData(tuple(pending),table.extraction,table.caption)
+        structure = replace(table,rows=tuple(pending))
         result.append(replace(block,id=f'{block.id}:rows{len(result)}',
                               text=render(pending),table=structure))
         pending.clear()
@@ -87,6 +87,7 @@ def chunk_blocks(blocks, max_chars=1400):
                 # A tall split table must not pretend that its omitted rows are
                 # source evidence. Retain only header/current-row glyph boxes.
                 result[-1] = replace(result[-1],boxes=tuple(
-                    cell.bbox for row in block.table.rows for cell in row if cell.bbox))
+                    dict.fromkeys(cell.bbox for row in block.table.rows+block.table.header_paths
+                                  for cell in row if cell.bbox)))
     flush()
     return tuple(result)

@@ -1,6 +1,6 @@
 # 工程原型验证记录
 
-验证日期为 2026 年 10 月 8–9 日。当前是早期工程原型，已上传至 [GitHub](https://github.com/HZYunMeng/PaperEvidence)。下文按版本保留历史验收记录。
+验证日期为 2026 年 10 月 8–10 日。当前是早期工程原型，已上传至 [GitHub](https://github.com/HZYunMeng/PaperEvidence)。下文按版本保留历史验收记录。
 
 使用 Python 3.12、pdfplumber 0.11.9、Streamlit 1.65.0 和 reportlab 4.4.9，在本项目独立虚拟环境中运行。该环境复用了 Codex 提供的基础 Python 包；还没有在全新操作系统上完成安装验收。直接依赖版本已固定。
 
@@ -78,3 +78,7 @@
 - 上轮 v0.4 上传后的 [GitHub Actions](https://github.com/HZYunMeng/PaperEvidence/actions/runs/37938537190) 已完成全新依赖安装，并在 Python 3.11、3.12 两个作业中通过；这不代表 macOS、Windows 或语义权重的全新环境验收。
 
 本轮页面交互通过 Streamlit AppTest 验证，PDF 原文通过完整页渲染核对。没有把 AppTest 当作真实浏览器截图或下载交互验收。
+
+## 第六轮：真实数值查表（工程版本 0.5.0）
+
+83 项测试通过；实际浏览器核对 CLIP 的查表结果、原页高亮与引用下载 JSON。两组真实开发集实际重跑 CPU E5，原三篇保持旧指标，NLP 四个目标表格事实恢复来源绑定。新结果明确为开发用途，历史固定代码协议及结果保留。无需模型的真实演示成为首次入口；基础启动不下载，点击才获取官方 PDF。源码不包含论文 PDF、权重与用户配置。完整结果及限制见 [本轮报告](TABLE-WORKFLOW.zh-CN.md)。
