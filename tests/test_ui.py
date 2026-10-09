@@ -91,10 +91,9 @@ class UITests(unittest.TestCase):
         import streamlit as st
         st.cache_data.clear()
         self.addCleanup(st.cache_data.clear)
-        app = Path(__file__).resolve().parents[1] / "app.py"
         empty = Paper("empty-fixture","demo-paper.pdf",2,(),("No indexable text",))
         with patch("paper_evidence.parsing.parse_pdf",return_value=empty):
-            at = AppTest.from_file(str(app),default_timeout=30).run()
+            at = fixture_app()
             next(f for f in at.checkbox if f.label=="打开逐页浏览").set_value(True).run()
             self.assertFalse(at.exception)
             self.assertEqual(next(f for f in at.selectbox if f.label=="浏览片段").options,["整页 PDF 原文"])
