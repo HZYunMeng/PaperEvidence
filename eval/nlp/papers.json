@@ -1,0 +1,25 @@
+[
+  {
+    "id": "bert",
+    "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+    "authors": "Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova",
+    "year": 2019,
+    "publication": "NAACL-HLT 2019 / ACL Anthology",
+    "page_url": "https://aclanthology.org/N19-1423/",
+    "pdf_url": "https://aclanthology.org/N19-1423.pdf",
+    "license_note": "ACL materials published in or after 2016 use CC-BY-4.0. Original author copyrights apply; PDF not bundled.",
+    "license_source": "https://aclanthology.org/N19-1423/",
+    "sha256": "987545ffb087f1ece898142c403a516baeabeb70ce19089397fac6f7db12c3d4"
+  },
+  {
+    "id": "transformer",
+    "title": "Attention Is All You Need",
+    "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, Illia Polosukhin",
+    "year": 2017,
+    "publication": "Advances in Neural Information Processing Systems 30",
+    "page_url": "https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html",
+    "pdf_url": "https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf",
+    "license_note": "Downloaded for local research from the official proceedings. No redistribution license asserted; PDF and page images are not bundled.",
+    "sha256": "d87d482d5ae7960e2e43d7dd6d21377e60e73e8fce1bf2a01aff7aca8a08c537"
+  }
+]

@@ -1,7 +1,8 @@
-"""Development-corpus evidence retrieval, separating cell parsing from retrieval."""
+"""Paper-specific evidence retrieval, separating cell parsing from retrieval."""
 import argparse
 import hashlib
 import json
+import math
 import platform
 import sys
 import time
@@ -15,6 +16,56 @@ from paper_evidence.parsing import parse_pdf
 from paper_evidence.retrieval import BM25
 from paper_evidence.semantic import DenseRetriever, E5Embedder, HybridRetriever
 from paper_evidence.tables import cell_reference
+from paper_evidence.corpus import load_manifest, verified_pdf
+
+
+def validate_cases(cases, papers):
+    """Fail on silent omissions, duplicate queries and inconsistent labels."""
+    if not isinstance(cases,list) or not cases:
+        raise ValueError("QA must be a non-empty list")
+    paper_ids = {p["id"] for p in papers}
+    seen = set()
+    for case in cases:
+        if (not isinstance(case,dict) or not isinstance(case.get("id"),str)
+                or not case["id"] or case["id"] in seen):
+            raise ValueError("QA IDs must be unique non-empty strings")
+        seen.add(case["id"])
+        if case.get("paper_id") not in paper_ids:
+            raise ValueError(f"Unknown paper: {case['id']}")
+        if "pair_id" in case and (not isinstance(case["pair_id"],str) or not case["pair_id"]):
+            raise ValueError(f"Invalid fact-pair ID: {case['id']}")
+        if (case.get("language") not in {"en","zh"} or type(case.get("answerable")) is not bool
+                or not isinstance(case.get("question"),str) or not case["question"].strip()):
+            raise ValueError(f"Invalid query: {case['id']}")
+        evidence = case.get("evidence")
+        if not isinstance(evidence,list) or bool(evidence) != case["answerable"]:
+            raise ValueError(f"Answerability/evidence mismatch: {case['id']}")
+        for entry in evidence:
+            if (not isinstance(entry,dict) or type(entry.get("page")) is not int or entry["page"] < 1
+                    or not isinstance(entry.get("quote"),str) or not entry["quote"].strip()
+                    or entry.get("kind") not in {"text","table"}):
+                raise ValueError(f"Invalid evidence: {case['id']}")
+            box = entry.get("bbox")
+            if (not isinstance(box,list) or len(box)!=4
+                    or any(type(v) not in {int,float} or not math.isfinite(v) for v in box)
+                    or box[0]>=box[2] or box[1]>=box[3]):
+                raise ValueError(f"Invalid source region: {case['id']}")
+            table = entry.get("table")
+            if entry["kind"]=="table" and (not isinstance(table,dict)
+                    or any(not isinstance(table.get(k),str) or not table[k].strip()
+                           for k in ("row_label","column_label"))):
+                raise ValueError(f"Missing table labels: {case['id']}")
+        if len({e["kind"] for e in evidence}) > 1:
+            raise ValueError(f"Each case must use one evidence kind: {case['id']}")
+
+
+def check_checkpoint(protocol, root=ROOT):
+    for name, expected in protocol.get("code_sha256",{}).items():
+        path = (root / name).resolve()
+        if not path.is_relative_to(root.resolve()) or path.suffix != ".py":
+            raise ValueError("Invalid checkpoint source path")
+        if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+            raise ValueError(f"Frozen-code checkpoint mismatch: {name}. Keep the original run; use a new labeled protocol for changed code.")
 
 
 def region_contains(box, target):
@@ -36,6 +87,10 @@ def has_bound_cell(chunk, expected):
     if not chunk.table or chunk.page != expected["page"]:
         return False
     wanted = expected["table"]
+    # The current source-cell adapter has no hierarchical header geometry.
+    # Repeated EN-DE/EN-FR labels must not satisfy a BLEU-group annotation.
+    if "column_group" in wanted:
+        return False
     for row in range(1,len(chunk.table.rows)):
         for column in range(1,len(chunk.table.rows[row])):
             try:
@@ -60,6 +115,9 @@ def summarize(rows):
     positive = [r for r in rows if r["answerable"]]
     tables = [r for r in positive if r["kind"] == "table"]
     return {"answerable_queries":len(positive),
+            "source_available_queries":sum(r["source_available"] for r in positive),
+            "table_queries":len(tables),
+            "bound_cell_available_queries":sum(r["bound_cell_available"] for r in tables),
             "evidence_recall_at_k":mean(positive,"evidence_recall"),
             "bound_cell_recall_at_k":mean(tables,"bound_cell_recall"),
             "by_language":{language:mean([r for r in positive if r["language"]==language],"evidence_recall")
@@ -72,29 +130,36 @@ def main():
     import pdfplumber
     parser = argparse.ArgumentParser()
     parser.add_argument("--k",type=int,default=3)
-    parser.add_argument("--out",type=Path,default=ROOT / "eval/real/results.json")
+    parser.add_argument("--dataset",type=Path,default=ROOT / "eval/real")
+    parser.add_argument("--data-dir",type=Path,default=ROOT / "data/real-papers")
+    parser.add_argument("--out",type=Path)
     parser.add_argument("--retrievers",nargs="+",choices=["bm25","dense","hybrid"],default=["bm25","dense","hybrid"])
     args = parser.parse_args()
     if not 1 <= args.k <= 20:
         parser.error("k must be between 1 and 20")
-    manifest = ROOT / "eval/real/papers.json"
-    qa_path = ROOT / "eval/real/qa.json"
-    papers = json.loads(manifest.read_text())
+    manifest = args.dataset / "papers.json"
+    qa_path = args.dataset / "qa.json"
+    papers = load_manifest(manifest)
     cases = json.loads(qa_path.read_text())
+    validate_cases(cases,papers)
+    protocol_path = args.dataset / "protocol.json"
+    protocol = json.loads(protocol_path.read_text()) if protocol_path.exists() else {}
+    check_checkpoint(protocol)
     embedder = E5Embedder() if set(args.retrievers)-{"bm25"} else None
     rows = {name:[] for name in args.retrievers}
     documents = []
     for item in papers:
-        path = ROOT / "data/real-papers" / (item["id"]+".pdf")
+        path = args.data_dir / (item["id"]+".pdf")
         if not path.exists():
-            parser.error("Run python scripts/fetch_real_papers.py first")
-        if hashlib.sha256(path.read_bytes()).hexdigest() != item["sha256"]:
-            parser.error(f"Document hash changed: {item['id']}")
+            parser.error("Fetch the selected corpus with scripts/fetch_real_papers.py --dataset first")
+        verified_pdf(path,item["sha256"])
         selected = [c for c in cases if c["paper_id"]==item["id"]]
         # Validate source annotations directly against the PDF, not retrieved chunks.
         with pdfplumber.open(path) as pdf:
             for case in selected:
                 for evidence in case["evidence"]:
+                    if evidence["page"] > len(pdf.pages):
+                        raise ValueError(f"Invalid source page: {case['id']}")
                     text = pdf.pages[evidence["page"]-1].crop(evidence["bbox"]).extract_text() or ""
                     if compact(evidence["quote"]) not in compact(text):
                         raise ValueError(f"Invalid source annotation: {case['id']}")
@@ -134,22 +199,28 @@ def main():
                     "query_seconds":elapsed,"candidate_count":len(hits),
                     "hits":[{"chunk_id":h.chunk.id,"page":h.chunk.page,"kind":h.chunk.kind,
                              "score":h.score,"score_kind":h.score_kind} for h in hits]})
-    result = {"dataset":"PMLR three-paper development corpus; agent-authored annotation draft",
+    result = {"dataset":protocol.get("dataset","PMLR three-paper development corpus; agent-authored annotation draft"),
               "run_date_utc":time.strftime("%Y-%m-%d",time.gmtime()),
-              "protocol":"Same paper-specific corpus, parser, 1400-character chunks and k for all retrievers. No generation calls.",
+              "protocol":protocol.get("protocol","Same paper-specific corpus, parser, 1400-character chunks and k for all retrievers. No generation calls."),
+              "checkpoint_commit":protocol.get("checkpoint_commit"),
+              "checkpoint_verified":bool(protocol.get("code_sha256")),
+              "protocol_sha256":hashlib.sha256(protocol_path.read_bytes()).hexdigest() if protocol_path.exists() else None,
+              "counts":{"papers":len(papers),"queries":len(cases),
+                        "answerable_facts":len({c.get("pair_id",c["id"]) for c in cases if c["answerable"]})},
               "metrics":{"evidence_recall":"annotated quote plus source-region center present in a top-k chunk",
-                         "bound_cell_recall":"correct parsed row label, header, value and source cell region in a top-k chunk"},
+                         "bound_cell_recall":"correct parsed row label, header, value and source cell region in a top-k chunk; hierarchical column groups currently unsupported and count as unavailable"},
               "k":args.k,"annotation_sha256":hashlib.sha256(qa_path.read_bytes()).hexdigest(),
               "manifest_sha256":hashlib.sha256(manifest.read_bytes()).hexdigest(),
               "code_sha256":{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in
-                             ("paper_evidence/parsing.py","paper_evidence/layout.py","paper_evidence/models.py","paper_evidence/chunking.py","paper_evidence/retrieval.py","paper_evidence/semantic.py","paper_evidence/tables.py","eval/real_eval.py")},
+                             ("paper_evidence/parsing.py","paper_evidence/layout.py","paper_evidence/models.py","paper_evidence/chunking.py","paper_evidence/retrieval.py","paper_evidence/semantic.py","paper_evidence/tables.py","paper_evidence/answering.py","paper_evidence/corpus.py","eval/real_eval.py")},
               "python":platform.python_version(),"architecture":platform.machine(),
               "model":embedder.metadata if embedder else None,"documents":documents,
               "retrievers":{name:{"summary":summarize(entries),"rows":entries} for name,entries in rows.items()},
-              "limitations":"Development data used while improving the parser, not a held-out benchmark. "
+              "limitations":protocol.get("limitations","Development data used while improving the parser, not a held-out benchmark. "
                   "Only three related computer-vision papers from one publisher; 12 facts paired across languages. "
                   "Annotations need independent human review. Evidence recall is not answer accuracy or semantic support. "
-                  "Unanswerable probe candidate counts do not measure hallucinations or abstention."}
+                  "Unanswerable probe candidate counts do not measure hallucinations or abstention.")}
+    args.out = args.out or args.dataset / "results.json"
     args.out.parent.mkdir(parents=True,exist_ok=True)
     args.out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n")
     print(json.dumps({name:data["summary"] for name,data in result["retrievers"].items()},indent=2))

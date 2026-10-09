@@ -1,0 +1,16 @@
+{
+  "dataset": "Two NLP papers; agent-authored paired annotations, no independent human review",
+  "checkpoint_commit": "eb7f6f10d258d3cae87e9fdec938e904d0a46b89",
+  "code_sha256": {
+    "paper_evidence/parsing.py": "8c2c021ed8eebe8805efc81a76bb40b50ed94c3c227f80b00dbabcab1c3eaecd",
+    "paper_evidence/layout.py": "ae15e977df1150f206245a38b197e47597fcad166997b7a8c1a4d0c9edffbe8b",
+    "paper_evidence/models.py": "7f5f83da1887590af1a1e07083d8f403c7d40fe6bff36acb3c4bdd06ac306588",
+    "paper_evidence/chunking.py": "36878b86e6053ad69814f9bf5210148b191c0d23cbde7f11229f097266b18488",
+    "paper_evidence/retrieval.py": "122f792310af127dca9a3b68b225dd556474881d6c8c55a6b7b5cce570f0d575",
+    "paper_evidence/semantic.py": "001899322b242ae3ae58d923b61b0e8e96fa7023f3caf5aaf9785da13736d0c5",
+    "paper_evidence/tables.py": "2622fa2e4c9ca9cc2d25a1cad070dae1eb2920277f5294cb908f553df2f90fd2",
+    "paper_evidence/answering.py": "d39eefd037441036426b865da8fcd539826e0fc58acf970a9c80b9a553a485f1"
+  },
+  "protocol": "Code checkpoint recorded before downloading the new PDFs or inspecting their annotations. No parser, chunking or retriever tuning on these questions in this run. Same paper-specific corpus, 1400-character chunks and k for each retriever. No generation calls.",
+  "limitations": "Small frozen-code expansion, not a statistically representative or independently annotated benchmark. Paired language questions are not independent facts. Evidence recall is not answer accuracy or semantic support. Negative probe candidate counts do not measure hallucination or abstention."
+}
