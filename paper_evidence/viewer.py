@@ -8,6 +8,7 @@ import streamlit as st
 
 from .parsing import highlight_page
 from .tables import cell_reference, table_value_claim
+from .catalog import row_source, row_label
 
 
 def show_text(text):
@@ -66,7 +67,7 @@ def inspect_source(source, chunk, *, binding=None, key_prefix="search", locked=F
         if choices:
             row = st.selectbox("数据行",choices,
                 index=choices.index(binding["row"]) if binding and binding["row"] in choices else 0,
-                format_func=lambda r:f"第 {r+1} 行 · {' / '.join(c.text for c in chunk.table.rows[r][:2])}",key=f"row-{key}",disabled=locked)
+                format_func=lambda r:f"片段第 {r+1} 行 · {row_label(row_source(chunk,r))}",key=f"row-{key}",disabled=locked)
             columns = bindable_columns(chunk,row)
             column = st.selectbox("数值列",columns,
                 index=columns.index(binding["column"]) if binding and binding["column"] in columns else 0,

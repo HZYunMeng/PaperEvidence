@@ -14,6 +14,8 @@ from paper_evidence.semantic import E5Embedder, default_model_path, make_retriev
 from paper_evidence.corpus import local_examples, verified_pdf, load_manifest, download_paper
 from paper_evidence.demo import PRESETS
 from paper_evidence.tables import find_cells, label_key
+from paper_evidence.catalog import match_label
+from paper_evidence.catalog_view import choose_catalog_cell, show_row_source
 from paper_evidence.viewer import inspect_source, show_page, show_text, source_label
 from paper_evidence import __version__
 
@@ -57,7 +59,7 @@ with st.sidebar:
 
 
 @st.cache_data(show_spinner=False, max_entries=4)
-def ingest(data, name, parser_revision="0.5.0"):
+def ingest(data, name, parser_revision="0.5.1"):
     paper = parse_pdf(data, name)
     return paper, chunk_blocks(paper.blocks)
 
@@ -147,6 +149,11 @@ if presets:
                 st.session_state[method_key],st.session_state[metric_key] = preset['method'],preset['metric']
                 st.session_state['cell_result'] = {'method':preset['method'],'metric':preset['metric'],
                                                   'matches':find_cells(chunks,preset['method'],preset['metric'])}
+catalog_ref = choose_catalog_cell(source,chunks,paper.id)
+if catalog_ref:
+    st.session_state[method_key],st.session_state[metric_key] = catalog_ref['row_label'],catalog_ref['column_label']
+    st.session_state['cell_result'] = {'method':catalog_ref['row_label'],'metric':catalog_ref['column_label'],
+                                      'matches':[catalog_ref],'source_selected':True}
 with st.form(f"cell-lookup-{paper.id}"):
     method = st.text_input("方法或模型名",key=method_key,placeholder="例如：BERT BASE")
     metric = st.text_input("指标名或完整分组路径",key=metric_key,placeholder="例如：MRPC 或 BLEU / EN-DE")
@@ -155,21 +162,23 @@ with st.form(f"cell-lookup-{paper.id}"):
 cell_result = st.session_state.get('cell_result')
 if cell_result:
     matches = cell_result['matches']
-    st.caption(f"本次查表：{cell_result['method']} · {cell_result['metric']}")
+    origin = '已按目录选定来源' if cell_result.get('source_selected') else '本次查表'
+    st.caption(f"{origin}：{cell_result['method']} · {cell_result['metric']}")
     selected_ref = None
     if not matches:
-        st.warning("没有找到可可靠绑定的匹配单元格。这不表示论文没有该数据：核对标签写法，或展开逐页浏览查看原文。")
+        st.warning("没有找到可可靠绑定的匹配单元格。这不表示论文没有该数据：可从上方表格目录选择原表标签，或展开逐页浏览查看原文。")
     elif len(matches)>1:
         st.info(f"找到 {len(matches)} 个来源。可能存在同名行、不同表格或重复列名，请选择来源；也可填写完整分组路径缩小范围。")
         selected_match = st.selectbox("选择数值来源",[None]+list(range(len(matches))),
             format_func=lambda i:"请选择，尚未确定来源" if i is None else
-                f"第 {matches[i]['page']} 页 · {matches[i]['row_label']} · {matches[i]['column_label']} · {matches[i]['value']}",
+                f"候选 {i+1} · "+match_label(matches[i],next(c for c in chunks if c.id==matches[i]['chunk_id'])),
             key=f"match-{paper.id}-{label_key(cell_result['method'])}-{label_key(cell_result['metric'])}")
         if selected_match is not None:
             selected_ref = matches[selected_match]
     else:
         selected_ref = matches[0]
     if selected_ref:
+        selected_chunk = next(c for c in chunks if c.id==selected_ref['chunk_id'])
         value_panel,pdf_panel = st.columns(2,gap="large")
         with value_panel:
             st.metric(selected_ref['column_label'],selected_ref['value'])
@@ -178,8 +187,8 @@ if cell_result:
             st.text(selected_ref['table_caption'])
             if selected_ref['row_context']:
                 st.json(selected_ref['row_context'])
+            show_row_source(selected_chunk,selected_ref['row'],key_prefix='lookup')
         with pdf_panel:
-            selected_chunk = next(c for c in chunks if c.id==selected_ref['chunk_id'])
             inspect_source(source,selected_chunk,binding=selected_ref,key_prefix="lookup",locked=True)
 with st.expander("逐页浏览论文（无需提问）"):
     if st.checkbox("打开逐页浏览",key=f"browse-{paper.id}"):

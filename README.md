@@ -50,6 +50,16 @@ Under **查实验数值**, enter the source method/model label and metric, then 
 
 Example buttons contain labels only, without stored answers, pages or coordinates. They invoke the same generic lookup as your inputs. This table scan is separate from top-k retrieval, so a successful demo is not a retrieval-quality metric.
 
+## Choose labels from the table directory
+
+If you do not know the source labels, open **不知道标签？从表格目录选择**, enable **打开表格目录**, then choose a table, data row and metric. Click **核对这个单元格** to inspect that physical source. Nothing is preselected. Fragments of a long table share one directory entry; distinct tables remain separate even when their captions match.
+
+Same-row fields are shown to help distinguish repeated method names, including numeric fields. You can inspect and export raw row fields and coordinates separately. The app does not infer experimental conditions from them; fields without geometry remain plain parsed text. Tables without bindable cells still expose their parsed text and a full-page preview. This directory covers recognized structures only.
+
+![Choose a real paper table, row and metric without typing labels](demo/table-catalog.jpg)
+
+[Workflow and verification](docs/TABLE-CATALOG.zh-CN.md).
+
 ## Inspect a table cell
 
 Select a table source, enable **定位表格单元格**, and choose its data row and value column. The app displays a source-derived value such as `Proposed · Accuracy: 91.2%`, highlights the row label, column header and value cell, and exports their coordinates.
