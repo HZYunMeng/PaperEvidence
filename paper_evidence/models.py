@@ -12,6 +12,8 @@ class TableData:
     rows: tuple[tuple[TableCell, ...], ...]
     extraction: str = "pdfplumber-lines"
     caption: str = ""
+    header_paths: tuple[tuple[TableCell, ...], ...] = ()
+    header_notes: str = ""
 
 
 @dataclass(frozen=True)

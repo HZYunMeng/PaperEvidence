@@ -73,6 +73,8 @@ def parse_pdf(source, name=None, *, max_pages=200):
                 text = table_markdown([[cell.text for cell in row] for row in structure.rows])
                 if structure.caption:
                     text += "\n" + structure.caption
+                if structure.header_notes:
+                    text += "\nHeader notes: " + structure.header_notes
                 objects.append((box, "table", text, structure))
             for table in candidates:
                 if any(_overlap(table.bbox, obj[0]) > 0.5 for obj in objects):
@@ -99,7 +101,7 @@ def parse_pdf(source, name=None, *, max_pages=200):
                     page.page_number, section, kind, text, tuple(map(float, box)), structure, flow,
                 ))
         count = len(pdf.pages)
-    warnings.append("阅读顺序和横线表格按坐标启发式恢复；多层表头、完全无边框表格、公式和复杂版式仍需原文核对。")
+    warnings.append("阅读顺序和横线表格按坐标启发式恢复；分组表头需明确的分组横线。无边框表格、跨页表格、公式和复杂版式仍需原文核对。")
     return Paper(doc_id, name, count, tuple(blocks), tuple(warnings))
 
 

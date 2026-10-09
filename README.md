@@ -1,14 +1,14 @@
 # PaperEvidence
 
-Inspect the evidence behind academic paper answers, down to the PDF page and source region.
+Look up experimental values in a paper, then inspect the method, metric and highlighted PDF source together.
 
 [中文说明](README.zh-CN.md) · [Development plan](docs/PLAN.zh-CN.md)
 
-Early working prototype of a multimodal academic RAG assistant. This version recovers common two-column reading order, extracts text and ruled tables, preserves page and section metadata, retrieves evidence with BM25, multilingual embeddings or rank fusion, and highlights source regions. Horizontal-rule numeric tables with a single header can be recovered; long tables split between rows with repeated headers and captions. Table values can be bound to their source row, header and cell. Optional local Ollama and configured cloud API adapters require verifiable quotations. **OCR, figure understanding, formula recognition and neural reranking are planned; they are not implemented yet.**
+An early local evidence inspection tool for text PDFs. Start with a real CLIP paper and click an example, or upload your own paper. The value lookup needs no API key or model weights. It matches parsed method and metric labels, preserves grouped headers where their source geometry is supported, and exports source coordinates. Free-form BM25, multilingual E5 and hybrid retrieval remain available separately.
 
-![Chinese query over an English PDF with source highlighting](demo/semantic-evidence-view.png)
+![Real CLIP value lookup and highlighted source](demo/real-value-source.jpg)
 
-The actual browser screenshot uses local multilingual retrieval and the fictional demo fixture in evidence-only mode.
+Actual browser capture, evidence-only mode. Source: Radford et al. (2021), PMLR, CC-BY-4.0; [asset attribution](demo/README.md). No generated answer was used. **OCR, figure understanding, formula recognition and neural reranking are not implemented.**
 
 ## Run the demo
 
@@ -21,7 +21,7 @@ python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
-On Windows, activate with `.venv\Scripts\activate`. The app starts with an original fictional PDF fixture. Its numbers are invented software test data, not scientific results. Evidence browsing needs no API key or model download.
+On Windows, activate with `.venv\Scripts\activate`. The app opens the real CLIP demo. Click **下载真实论文并开始** to fetch the official PDF with hash verification, then **CLIP 的 ImageNet 准确率** to inspect a source cell. Startup does not download anything. If the publisher is unavailable, upload a text PDF or choose **虚构演示论文** in the sidebar; its values are invented test data.
 
 ## Command line
 
@@ -44,6 +44,22 @@ Open **逐页浏览论文（无需提问）**, enable the browser, and select a 
 
 Downloaded examples are discovered from corpus manifests and shown only after PDF hash verification. The app never downloads papers during startup. Source excerpts and retrieval results share the same cell inspector, and value columns without usable geometry are excluded.
 
+## Look up an experimental value
+
+Under **查实验数值**, enter the source method/model label and metric, then click **查找数值**. For grouped headers use a full path such as `BLEU / EN-DE`. Whitespace, case, underscores, parentheses and hyphens are normalized; aliases, calculations and unit conversions are not inferred. All matching cells across parsed tables are considered. Multiple matches require a source selection; no match does not mean the paper lacks the data.
+
+Example buttons contain labels only, without stored answers, pages or coordinates. They invoke the same generic lookup as your inputs. This table scan is separate from top-k retrieval, so a successful demo is not a retrieval-quality metric.
+
+## Choose labels from the table directory
+
+If you do not know the source labels, open **不知道标签？从表格目录选择**, enable **打开表格目录**, then choose a table, data row and metric. Click **核对这个单元格** to inspect that physical source. Nothing is preselected. Fragments of a long table share one directory entry; distinct tables remain separate even when their captions match.
+
+Same-row fields are shown to help distinguish repeated method names, including numeric fields. You can inspect and export raw row fields and coordinates separately. The app does not infer experimental conditions from them; fields without geometry remain plain parsed text. Tables without bindable cells still expose their parsed text and a full-page preview. This directory covers recognized structures only.
+
+![Choose a real paper table, row and metric without typing labels](demo/table-catalog.jpg)
+
+[Workflow and verification](docs/TABLE-CATALOG.zh-CN.md).
+
 ## Inspect a table cell
 
 Select a table source, enable **定位表格单元格**, and choose its data row and value column. The app displays a source-derived value such as `Proposed · Accuracy: 91.2%`, highlights the row label, column header and value cell, and exports their coordinates.
@@ -52,7 +68,7 @@ Select a table source, enable **定位表格单元格**, and choose its data row
 
 For generated numeric claims citing a table, the model must return only `{"table_value":{"chunk_id":"ID","row":2,"column":1}}`. Coordinates are zero-based. The application reads labels and values from the parsed source; the model cannot supply a replacement value or free-form text for that claim. Citing a whole table is insufficient to validate a numeric claim. Evidence-only browsing continues to show the whole original table.
 
-This adapter assumes the first row is the header and the first column is the row label. Duplicate row labels include available source context, such as architecture, in the citation and highlight. Row indices are local to the retrieved fragment; long tables repeat their header and caption. Empty, merged or multiline selected cells are rejected. **A correct source cell may still answer the wrong question; tables misparsed as plain text are still subject only to quote and numeric-presence checks.** Re-ingest a version-1 JSON index to obtain cell geometry; the loader remains compatible with its text evidence.
+This adapter assumes the first row is the header and the first column is the row label. Duplicate row labels include available source context, such as architecture, in the citation and highlight. Row indices are local to the retrieved fragment; long tables repeat their header and caption. Empty, spanning, merged or multiline selected cells are rejected. Supported parent headers are also highlighted; unsupported headers fall back to text. **A correct source cell may still answer the wrong question; tables misparsed as plain text are still subject only to quote and numeric-presence checks.** Indexes now use schema 3 for source header paths. Schemas 1 and 2 remain readable; re-ingest their PDFs to obtain new geometry and grouped headers.
 
 ![Real-paper cell inspection](demo/real-cell-citation-view.png)
 
@@ -108,27 +124,30 @@ These are fictional fixture results, not evidence of real-paper quality gains. T
 
 ```bash
 python scripts/fetch_real_papers.py
-python eval/real_eval.py
+python eval/real_eval.py --out eval/real/v0.5-development-results.json
 # Lexical evaluation without embedding weights:
 python eval/real_eval.py --retrievers bm25 --out eval/real/bm25-results.json
 ```
 
-Three PMLR papers, 12 source facts paired across English and Chinese (24 answerable queries), and three unanswerable probes are included as annotation drafts. PDFs are fetched separately from their official publisher and verified against pinned hashes. The current run retrieves the annotated quote and its PDF region in the top three chunks for **18/24 BM25 queries, 9/24 dense queries and 14/24 hybrid queries**. All six annotated table facts have usable source cell structure; top-3 bound-cell recall on the twelve paired table queries is 10/12 BM25, 7/12 dense and 9/12 hybrid. Dense retrieval does not outperform the lexical baseline here.
+Three PMLR papers, 12 source facts paired across English and Chinese (24 answerable queries), and three unanswerable probes are included as annotation drafts. PDFs are fetched separately from their official publisher and verified against pinned hashes. The retained v0.4 run retrieves the annotated quote and its PDF region in the top three chunks for **18/24 BM25 queries, 9/24 dense queries and 14/24 hybrid queries**. All six annotated table facts have usable source cell structure; top-3 bound-cell recall on the twelve paired table queries is 10/12 BM25, 7/12 dense and 9/12 hybrid. Dense retrieval does not outperform the lexical baseline here.
 
 These papers were used during parser development; this is not a held-out benchmark, and annotations need independent human review. [Report and failure cases](docs/REAL-EVAL.zh-CN.md), [annotations](eval/real/qa.json), [sources](eval/real/papers.json) and [raw results](eval/real/results.json) are provided. Initial diagnostics, the v0.3 run and the current run are retained. After fetching the PDFs, they are also available under the sidebar sample selector. No generated-answer accuracy or hallucination metric is reported.
 
-### Frozen-code NLP expansion
+### Table parsing development and preserved NLP baseline
 
 ```bash
 python scripts/fetch_real_papers.py --dataset eval/nlp
-python eval/real_eval.py --dataset eval/nlp --retrievers bm25 --out eval/nlp/bm25-results.json
-# With the prepared local E5 weights:
-python eval/real_eval.py --dataset eval/nlp
+# Current code; BM25 requires no embedding weights:
+python eval/real_eval.py --dataset eval/nlp --protocol eval/nlp/development-protocol.json --retrievers bm25 --out eval/nlp/v0.5-bm25-results.json
+# With prepared local E5 weights:
+python eval/real_eval.py --dataset eval/nlp --protocol eval/nlp/development-protocol.json --out eval/nlp/v0.5-development-results.json
 ```
 
-Two additional official PDFs ([BERT](https://aclanthology.org/N19-1423/) and [Attention Is All You Need](https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html)) were inspected after freezing the existing core code. Eight facts paired across languages yield 16 answerable queries: evidence recall@3 is **9/16 BM25, 6/16 dense and 9/16 hybrid**. All target short quotes and regions exist in the index, but **none of the four table facts have reliable cell bindings**. BERT's wide table loses row context when split as text; the Transformer's grouped, repeated column headers remain unsupported. Quote recall must not be mistaken for correct row/column interpretation.
+The original frozen-code expansion is retained at `eval/nlp/results.json`: BERT and Transformer, eight facts paired in English and Chinese, evidence recall@3 **9/16 BM25, 6/16 dense, 9/16 hybrid**, with none of the four table facts bound. Reproduce that historical run at commit `474108757fc41ccbd5263a9a2033b0ff9e017d08`; its protocol rejects changed core code.
 
-This is a small agent-annotated expansion without independent human review or code tuning on these questions in this run. It is not a representative benchmark. The selected dataset's `protocol.json` enforces core code hashes; changed code requires a new labeled protocol while retaining the original result. See [protocol, failures and reproduction](docs/NLP-EVAL.zh-CN.md) and [raw results](eval/nlp/results.json). No generation calls were made.
+Those failures have now been used to develop header-band parsing, so the new run is explicitly a **development run**. All four annotated table facts have source cell bindings in the full index. Top-3 evidence recall is **11/16 BM25, 6/16 dense, 12/16 hybrid**; bound-cell recall on eight paired table queries is **6/8, 4/8, 7/8**. The earlier three-paper development corpus retains evidence recall **18/24, 9/24, 14/24** and bound-cell recall **10/12, 7/12, 9/12**.
+
+These are small agent-annotated development sets without independent human review. They do not establish generalization, answer accuracy or hallucination reductions. No generation calls were made. [Current protocol and failures](docs/TABLE-WORKFLOW.zh-CN.md), [new NLP results](eval/nlp/v0.5-development-results.json), [regression results](eval/real/v0.5-development-results.json) and [historical frozen protocol](docs/NLP-EVAL.zh-CN.md) remain available.
 
 ## Architecture
 
@@ -147,7 +166,7 @@ flowchart LR
 
 ## Limitations
 
-- Geometric heuristics can still mix complex column layouts, miss entirely borderless or multiheader tables and lose mathematical structure. See the [parser contract](docs/PARSER.zh-CN.md). Scanned pages and figures are explicitly reported as unindexed. Section detection is a rule based heuristic.
+- Geometric heuristics can still mix complex column layouts, miss borderless tables and unsupported grouped headers and lose mathematical structure. See the [parser contract](docs/PARSER.zh-CN.md). Scanned pages and figures are explicitly reported as unindexed. Section detection is a rule based heuristic.
 - BM25 is lexical; multilingual embeddings support cross-language candidate retrieval but still need broader independently reviewed real-paper validation. Neither similarity nor fused rank proves that a candidate answers the question.
 - The current index is a portable JSON file. Uploads in the UI are held in process memory and Streamlit's data cache; restart the app to clear them. This is a local prototype, not a multi-user hosted service.
 - No weights, keys or downloaded real-paper PDFs are bundled in the source archive. Semantic inference runs locally after explicit preparation; optional generation requires a local model or a configured cloud service. Broader independently reviewed retrieval and generated-answer benchmarks remain outstanding.

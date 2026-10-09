@@ -37,7 +37,9 @@ class MetricTests(unittest.TestCase):
         papers = json.loads((root / "eval/nlp/papers.json").read_text())
         cases = json.loads((root / "eval/nlp/qa.json").read_text())
         validate_cases(cases,papers)
-        check_checkpoint(json.loads((root / "eval/nlp/protocol.json").read_text()))
+        protocol = json.loads((root / "eval/nlp/protocol.json").read_text())
+        baseline = json.loads((root / "eval/nlp/results.json").read_text())
+        self.assertTrue(all(baseline['code_sha256'][name]==sha for name,sha in protocol['code_sha256'].items()))
         for change in ({"paper_id":"missing"},{"answerable":False},{"language":"other"},
                        {"evidence":[{**cases[0]["evidence"][0],"page":True}]},
                        {"evidence":[{**cases[0]["evidence"][0],"bbox":[0,0,float('nan'),20]}]}):
