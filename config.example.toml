@@ -1,0 +1,15 @@
+# Copy to config.toml. The real key belongs in an environment variable, not this file.
+# Example: Alibaba Cloud Model Studio, China mainland endpoint.
+[llm]
+base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+model = "qwen-plus"
+api_key_env = "DASHSCOPE_API_KEY"
+max_tokens = 1200
+max_evidence_chars = 16000
+timeout = 90
+json_mode = true
+enable_thinking = false
+
+[retrieval]
+# Optional absolute local path. Leave blank to use models/multilingual-e5-small.
+model_path = ""

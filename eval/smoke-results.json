@@ -1,0 +1,138 @@
+{
+  "dataset": "fictional smoke-test fixture",
+  "document_sha256": "b2055372eb012f98bcad7383528c4d8b9ba382f7553dc67eabad14836bef0b12",
+  "qa_sha256": "c317264c8ab50c0fec6c437de6f9b77b2c33303e1526c7e6a992fb7f4818fab8",
+  "parsed_blocks_sha256": "31eb8bdb32f5f468745fce76f2d809ad69af1cccad455db5be582177b3b1faf5",
+  "k": 3,
+  "chunk_chars": 1400,
+  "retriever": "BM25",
+  "metric": "fraction of annotated page/quote pairs fully present in at least one top-k chunk",
+  "fixed_window": {
+    "mean_evidence_recall_at_k": 1.0,
+    "queries": 7,
+    "chunks": 2,
+    "rows": [
+      {
+        "id": "dataset",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "6eb138aa65fa78b3"
+        ]
+      },
+      {
+        "id": "train-size",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "6eb138aa65fa78b3"
+        ]
+      },
+      {
+        "id": "metric",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "6eb138aa65fa78b3",
+          "79ce2fb7d0b20538"
+        ]
+      },
+      {
+        "id": "accuracy",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "79ce2fb7d0b20538",
+          "6eb138aa65fa78b3"
+        ]
+      },
+      {
+        "id": "baseline",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "79ce2fb7d0b20538",
+          "6eb138aa65fa78b3"
+        ]
+      },
+      {
+        "id": "latency",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "79ce2fb7d0b20538",
+          "6eb138aa65fa78b3"
+        ]
+      },
+      {
+        "id": "limitations",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "79ce2fb7d0b20538",
+          "6eb138aa65fa78b3"
+        ]
+      }
+    ]
+  },
+  "section_aware": {
+    "mean_evidence_recall_at_k": 1.0,
+    "queries": 7,
+    "chunks": 8,
+    "rows": [
+      {
+        "id": "dataset",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "47b752fc57dbc50a"
+        ]
+      },
+      {
+        "id": "train-size",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "b00be6e0b70ef729",
+          "eb72811bb511c2c3"
+        ]
+      },
+      {
+        "id": "metric",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "b00be6e0b70ef729",
+          "df0f4094ac15cae2"
+        ]
+      },
+      {
+        "id": "accuracy",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "1d9e1d6badbe84d3",
+          "75a813ea10cf103d",
+          "b00be6e0b70ef729"
+        ]
+      },
+      {
+        "id": "baseline",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "1d9e1d6badbe84d3",
+          "75a813ea10cf103d",
+          "b00be6e0b70ef729"
+        ]
+      },
+      {
+        "id": "latency",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "1d9e1d6badbe84d3",
+          "75a813ea10cf103d",
+          "b00be6e0b70ef729"
+        ]
+      },
+      {
+        "id": "limitations",
+        "evidence_recall": 1.0,
+        "retrieved_ids": [
+          "ddeac2aa5f02398e",
+          "eb72811bb511c2c3",
+          "b00be6e0b70ef729"
+        ]
+      }
+    ]
+  },
+  "limitations": "Small retrieval-only test; does not measure answer correctness, hallucination or real scientific performance."
+}

@@ -1,0 +1,639 @@
+[
+  {
+    "id": "simclr-batch-en",
+    "paper_id": "simclr",
+    "pair_id": "simclr-batch",
+    "language": "en",
+    "question": "What is the largest training batch size explored by SimCLR?",
+    "reference_answer": "8192",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 3,
+        "quote": "8192",
+        "bbox": [
+          211.7,
+          424.4,
+          234.7,
+          434.5
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "simclr-batch-zh",
+    "paper_id": "simclr",
+    "pair_id": "simclr-batch",
+    "language": "zh",
+    "question": "SimCLR 探索的最大训练批量是多少？",
+    "reference_answer": "8192",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 3,
+        "quote": "8192",
+        "bbox": [
+          211.7,
+          424.4,
+          234.7,
+          434.5
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "simclr-optimizer-en",
+    "paper_id": "simclr",
+    "pair_id": "simclr-optimizer",
+    "language": "en",
+    "question": "Which optimizer stabilizes SimCLR training across batch sizes?",
+    "reference_answer": "LARS",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 3,
+        "quote": "LARS",
+        "bbox": [
+          181.8,
+          484.2,
+          206.9,
+          494.3
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "simclr-optimizer-zh",
+    "paper_id": "simclr",
+    "pair_id": "simclr-optimizer",
+    "language": "zh",
+    "question": "SimCLR 使用哪种优化器稳定不同批量的训练？",
+    "reference_answer": "LARS",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 3,
+        "quote": "LARS",
+        "bbox": [
+          181.8,
+          484.2,
+          206.9,
+          494.3
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "simclr-r50-top1-en",
+    "paper_id": "simclr",
+    "pair_id": "simclr-r50-top1",
+    "language": "en",
+    "question": "In Table 6, what is the linear evaluation Top 1 accuracy of SimCLR with ResNet-50 (1x)?",
+    "reference_answer": "69.3",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 7,
+        "quote": "69.3",
+        "bbox": [
+          487,
+          135.2,
+          503,
+          144.4
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "SimCLR(ours)",
+          "column_label": "Top1",
+          "row_context": "ResNet-50"
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "simclr-r50-top1-zh",
+    "paper_id": "simclr",
+    "pair_id": "simclr-r50-top1",
+    "language": "zh",
+    "question": "表 6 中，SimCLR 使用 ResNet-50（1 倍宽度）的线性评估 Top 1 准确率是多少？",
+    "reference_answer": "69.3",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 7,
+        "quote": "69.3",
+        "bbox": [
+          487,
+          135.2,
+          503,
+          144.4
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "SimCLR(ours)",
+          "column_label": "Top1",
+          "row_context": "ResNet-50"
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "simclr-r50x4-top1-en",
+    "paper_id": "simclr",
+    "pair_id": "simclr-r50x4-top1",
+    "language": "en",
+    "question": "In Table 6, what Top 1 accuracy does SimCLR ResNet-50 (4x) achieve?",
+    "reference_answer": "76.5",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 7,
+        "quote": "76.5",
+        "bbox": [
+          487,
+          229.8,
+          503,
+          239.1
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "SimCLR(ours)",
+          "column_label": "Top1",
+          "row_context": "ResNet-50(4×)"
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "simclr-r50x4-top1-zh",
+    "paper_id": "simclr",
+    "pair_id": "simclr-r50x4-top1",
+    "language": "zh",
+    "question": "表 6 中，SimCLR ResNet-50（4 倍宽度）的 Top 1 准确率是多少？",
+    "reference_answer": "76.5",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 7,
+        "quote": "76.5",
+        "bbox": [
+          487,
+          229.8,
+          503,
+          239.1
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "SimCLR(ours)",
+          "column_label": "Top1",
+          "row_context": "ResNet-50(4×)"
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "clip-data-en",
+    "paper_id": "clip",
+    "pair_id": "clip-data",
+    "language": "en",
+    "question": "How many image-text pairs are used to pre-train CLIP?",
+    "reference_answer": "400 million image-text pairs",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 1,
+        "quote": "400",
+        "bbox": [
+          254.2,
+          339.7,
+          269.7,
+          349.9
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "clip-data-zh",
+    "paper_id": "clip",
+    "pair_id": "clip-data",
+    "language": "zh",
+    "question": "CLIP 预训练使用了多少图文对？",
+    "reference_answer": "400 million image-text pairs",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 1,
+        "quote": "400",
+        "bbox": [
+          254.2,
+          339.7,
+          269.7,
+          349.9
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "clip-layers-en",
+    "paper_id": "clip",
+    "pair_id": "clip-layers",
+    "language": "en",
+    "question": "How many layers does the base CLIP text transformer have?",
+    "reference_answer": "12 layers",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 4,
+        "quote": "12-layer",
+        "bbox": [
+          214,
+          93,
+          248.2,
+          103.3
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "clip-layers-zh",
+    "paper_id": "clip",
+    "pair_id": "clip-layers",
+    "language": "zh",
+    "question": "CLIP 基础文本 Transformer 有多少层？",
+    "reference_answer": "12 layers",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 4,
+        "quote": "12-layer",
+        "bbox": [
+          214,
+          93,
+          248.2,
+          103.3
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "clip-imagenet-en",
+    "paper_id": "clip",
+    "pair_id": "clip-imagenet",
+    "language": "en",
+    "question": "In Table 1, what is CLIP zero-shot ImageNet accuracy?",
+    "reference_answer": "76.2",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 4,
+        "quote": "76.2",
+        "bbox": [
+          457.8,
+          110.7,
+          475.6,
+          121
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "CLIP",
+          "column_label": "ImageNet"
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "clip-imagenet-zh",
+    "paper_id": "clip",
+    "pair_id": "clip-imagenet",
+    "language": "zh",
+    "question": "表 1 中，CLIP 在 ImageNet 上的零样本准确率是多少？",
+    "reference_answer": "76.2",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 4,
+        "quote": "76.2",
+        "bbox": [
+          457.8,
+          110.7,
+          475.6,
+          121
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "CLIP",
+          "column_label": "ImageNet"
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "clip-ngram-en",
+    "paper_id": "clip",
+    "pair_id": "clip-ngram",
+    "language": "en",
+    "question": "In Table 1, what is Visual N-Grams zero-shot ImageNet accuracy?",
+    "reference_answer": "11.5",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 4,
+        "quote": "11.5",
+        "bbox": [
+          457.8,
+          98.8,
+          475.6,
+          109.1
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "VisualN-Grams",
+          "column_label": "ImageNet"
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "clip-ngram-zh",
+    "paper_id": "clip",
+    "pair_id": "clip-ngram",
+    "language": "zh",
+    "question": "表 1 中，Visual N-Grams 在 ImageNet 上的零样本准确率是多少？",
+    "reference_answer": "11.5",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 4,
+        "quote": "11.5",
+        "bbox": [
+          457.8,
+          98.8,
+          475.6,
+          109.1
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "VisualN-Grams",
+          "column_label": "ImageNet"
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "efficientnet-block-en",
+    "paper_id": "efficientnet",
+    "pair_id": "efficientnet-block",
+    "language": "en",
+    "question": "What is the main building block of EfficientNet-B0?",
+    "reference_answer": "mobile inverted bottleneck MBConv",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 5,
+        "quote": "MBConv",
+        "bbox": [
+          483,
+          270,
+          519.5,
+          280.3
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "efficientnet-block-zh",
+    "paper_id": "efficientnet",
+    "pair_id": "efficientnet-block",
+    "language": "zh",
+    "question": "EfficientNet-B0 的主要网络构建模块是什么？",
+    "reference_answer": "mobile inverted bottleneck MBConv",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 5,
+        "quote": "MBConv",
+        "bbox": [
+          483,
+          270,
+          519.5,
+          280.3
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "efficientnet-optimizer-en",
+    "paper_id": "efficientnet",
+    "pair_id": "efficientnet-optimizer",
+    "language": "en",
+    "question": "Which optimizer is used for training EfficientNet on ImageNet?",
+    "reference_answer": "RMSProp",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 6,
+        "quote": "RMSProp",
+        "bbox": [
+          439.4,
+          671.2,
+          480.1,
+          681.6
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "efficientnet-optimizer-zh",
+    "paper_id": "efficientnet",
+    "pair_id": "efficientnet-optimizer",
+    "language": "zh",
+    "question": "EfficientNet 在 ImageNet 上训练时使用什么优化器？",
+    "reference_answer": "RMSProp",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 6,
+        "quote": "RMSProp",
+        "bbox": [
+          439.4,
+          671.2,
+          480.1,
+          681.6
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "efficientnet-b0-top1-en",
+    "paper_id": "efficientnet",
+    "pair_id": "efficientnet-b0-top1",
+    "language": "en",
+    "question": "In Table 2, what ImageNet Top-1 accuracy does EfficientNet-B0 achieve?",
+    "reference_answer": "76.3%",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 6,
+        "quote": "76.3%",
+        "bbox": [
+          218,
+          144.5,
+          240.9,
+          153
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "EfficientNet-B0",
+          "column_label": "Top-1Acc."
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "efficientnet-b0-top1-zh",
+    "paper_id": "efficientnet",
+    "pair_id": "efficientnet-b0-top1",
+    "language": "zh",
+    "question": "表 2 中，EfficientNet-B0 的 ImageNet Top-1 准确率是多少？",
+    "reference_answer": "76.3%",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 6,
+        "quote": "76.3%",
+        "bbox": [
+          218,
+          144.5,
+          240.9,
+          153
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "EfficientNet-B0",
+          "column_label": "Top-1Acc."
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "efficientnet-b7-params-en",
+    "paper_id": "efficientnet",
+    "pair_id": "efficientnet-b7-params",
+    "language": "en",
+    "question": "In Table 2, how many parameters does EfficientNet-B7 have?",
+    "reference_answer": "66M",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 6,
+        "quote": "66M",
+        "bbox": [
+          312.2,
+          391.1,
+          328.6,
+          399.8
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "EfficientNet-B7",
+          "column_label": "#Params"
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "efficientnet-b7-params-zh",
+    "paper_id": "efficientnet",
+    "pair_id": "efficientnet-b7-params",
+    "language": "zh",
+    "question": "表 2 中，EfficientNet-B7 有多少参数？",
+    "reference_answer": "66M",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 6,
+        "quote": "66M",
+        "bbox": [
+          312.2,
+          391.1,
+          328.6,
+          399.8
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "EfficientNet-B7",
+          "column_label": "#Params"
+        }
+      }
+    ],
+    "review": "agent-read PDF page and source geometry; not independently human-reviewed"
+  },
+  {
+    "id": "simclr-unanswerable",
+    "paper_id": "simclr",
+    "pair_id": "simclr-unanswerable",
+    "language": "en",
+    "question": "Which AES key length is used to encrypt the training data?",
+    "reference_answer": null,
+    "answerable": false,
+    "evidence": [],
+    "review": "Absent from the discussed training methods; requires independent review"
+  },
+  {
+    "id": "clip-unanswerable",
+    "paper_id": "clip",
+    "pair_id": "clip-unanswerable",
+    "language": "en",
+    "question": "Which AES key length is used to encrypt the training data?",
+    "reference_answer": null,
+    "answerable": false,
+    "evidence": [],
+    "review": "Absent from the discussed training methods; requires independent review"
+  },
+  {
+    "id": "efficientnet-unanswerable",
+    "paper_id": "efficientnet",
+    "pair_id": "efficientnet-unanswerable",
+    "language": "en",
+    "question": "Which AES key length is used to encrypt the training data?",
+    "reference_answer": null,
+    "answerable": false,
+    "evidence": [],
+    "review": "Absent from the discussed training methods; requires independent review"
+  }
+]

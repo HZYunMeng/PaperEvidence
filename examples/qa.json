@@ -1,0 +1,9 @@
+[
+  {"id":"dataset","question":"What dataset is used?","evidence":[{"page":1,"quote":"DemoQA"}]},
+  {"id":"train-size","question":"How many examples are in the synthetic training set?","evidence":[{"page":1,"quote":"120 examples"}]},
+  {"id":"metric","question":"What evaluation metric is used?","evidence":[{"page":1,"quote":"exact-match accuracy"}]},
+  {"id":"accuracy","question":"What accuracy did the proposed method achieve?","evidence":[{"page":2,"quote":"91.2%"}]},
+  {"id":"baseline","question":"What is the baseline accuracy?","evidence":[{"page":2,"quote":"82.4%"}]},
+  {"id":"latency","question":"What is the proposed method latency?","evidence":[{"page":2,"quote":"310 ms"}]},
+  {"id":"limitations","question":"Does the demo include scanned documents?","evidence":[{"page":2,"quote":"does not include scanned documents"}]}
+]

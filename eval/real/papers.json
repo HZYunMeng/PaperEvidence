@@ -1,0 +1,38 @@
+[
+  {
+    "id": "simclr",
+    "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+    "authors": "Ting Chen, Simon Kornblith, Mohammad Norouzi, Geoffrey Hinton",
+    "year": 2020,
+    "publication": "Proceedings of Machine Learning Research",
+    "page_url": "https://proceedings.mlr.press/v119/chen20j.html",
+    "pdf_url": "https://proceedings.mlr.press/v119/chen20j/chen20j.pdf",
+    "sha256": "cc620e511bafe8b4b11ca3415f6d7bcf127a05818087bfa49905de3a2e50bc2d",
+    "license_note": "PMLR publication agreement specifies CC-BY-4.0; original author copyrights apply. PDFs are not bundled.",
+    "license_source": "https://proceedings.mlr.press/pmlr-license-agreement.html"
+  },
+  {
+    "id": "clip",
+    "title": "Learning Transferable Visual Models From Natural Language Supervision",
+    "authors": "Alec Radford et al.",
+    "year": 2021,
+    "publication": "Proceedings of Machine Learning Research",
+    "page_url": "https://proceedings.mlr.press/v139/radford21a.html",
+    "pdf_url": "https://proceedings.mlr.press/v139/radford21a/radford21a.pdf",
+    "sha256": "2a4952960f350e50a3a4a847371b80b8aaa09ba82d1c2a8f6b30450e392a1fe4",
+    "license_note": "PMLR publication agreement specifies CC-BY-4.0; original author copyrights apply. PDFs are not bundled.",
+    "license_source": "https://proceedings.mlr.press/pmlr-license-agreement.html"
+  },
+  {
+    "id": "efficientnet",
+    "title": "EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks",
+    "authors": "Mingxing Tan, Quoc Le",
+    "year": 2019,
+    "publication": "Proceedings of Machine Learning Research",
+    "page_url": "https://proceedings.mlr.press/v97/tan19a.html",
+    "pdf_url": "https://proceedings.mlr.press/v97/tan19a/tan19a.pdf",
+    "sha256": "f82da3f7dfb827fe701fae2088f3653e17cb3216ef61111be1167f01dcc92137",
+    "license_note": "PMLR publication agreement specifies CC-BY-4.0; original author copyrights apply. PDFs are not bundled.",
+    "license_source": "https://proceedings.mlr.press/pmlr-license-agreement.html"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "dataset": "synthetic text integration check",
+  "model": {
+    "model_id": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "max_tokens": 512,
+    "window_overlap": 64,
+    "device": "cpu",
+    "adapter": "e5-token-windows-v1"
+  },
+  "windows": 5,
+  "window_token_counts": [
+    512,
+    512,
+    512,
+    512,
+    403
+  ],
+  "tail_retained": true,
+  "original_chunk_retained": true,
+  "overlong_question_rejected": true,
+  "quality_benchmark": false
+}

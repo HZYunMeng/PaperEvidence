@@ -1,0 +1,3148 @@
+{
+  "dataset": "PMLR three-paper development corpus; agent-authored annotation draft",
+  "run_date_utc": "2026-10-08",
+  "protocol": "Same paper-specific corpus, parser, 1400-character chunks and k for all retrievers. No generation calls.",
+  "metrics": {
+    "evidence_recall": "annotated quote plus source-region center present in a top-k chunk",
+    "bound_cell_recall": "correct parsed row label, header, value and source cell region in a top-k chunk"
+  },
+  "k": 3,
+  "annotation_sha256": "7da54824305840fdd406d969da89e56cc103992c146603665175fc3dc0c17374",
+  "manifest_sha256": "43bd7e205cbab5bdda519949b83cba6f31b32f3c89b973fcaec0ce505cc95eb1",
+  "code_sha256": {
+    "paper_evidence/parsing.py": "8c2c021ed8eebe8805efc81a76bb40b50ed94c3c227f80b00dbabcab1c3eaecd",
+    "paper_evidence/layout.py": "ae15e977df1150f206245a38b197e47597fcad166997b7a8c1a4d0c9edffbe8b",
+    "paper_evidence/models.py": "7f5f83da1887590af1a1e07083d8f403c7d40fe6bff36acb3c4bdd06ac306588",
+    "paper_evidence/chunking.py": "36878b86e6053ad69814f9bf5210148b191c0d23cbde7f11229f097266b18488",
+    "paper_evidence/retrieval.py": "122f792310af127dca9a3b68b225dd556474881d6c8c55a6b7b5cce570f0d575",
+    "paper_evidence/semantic.py": "001899322b242ae3ae58d923b61b0e8e96fa7023f3caf5aaf9785da13736d0c5",
+    "paper_evidence/tables.py": "2622fa2e4c9ca9cc2d25a1cad070dae1eb2920277f5294cb908f553df2f90fd2",
+    "eval/real_eval.py": "73c45a874d6bc676f3d88dcd610519ddff6eef45f98904ac04c8b5bdd4ca2897"
+  },
+  "python": "3.12.14",
+  "architecture": "arm64",
+  "model": {
+    "model_id": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "max_tokens": 512,
+    "window_overlap": 64,
+    "device": "cpu",
+    "adapter": "e5-token-windows-v1"
+  },
+  "documents": [
+    {
+      "id": "simclr",
+      "sha256": "cc620e511bafe8b4b11ca3415f6d7bcf127a05818087bfa49905de3a2e50bc2d",
+      "pages": 11,
+      "chunks": 68,
+      "table_chunks": 3,
+      "parse_seconds": 1.1505346249905415,
+      "embedding_seconds": 1.1239895409962628,
+      "warnings": [
+        "第 1 页含 1 个图片对象；图片内容尚未进入检索。",
+        "第 4 页含 11 个图片对象；图片内容尚未进入检索。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 6 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 7 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "阅读顺序和横线表格按坐标启发式恢复；多层表头、完全无边框表格、公式和复杂版式仍需原文核对。"
+      ]
+    },
+    {
+      "id": "clip",
+      "sha256": "2a4952960f350e50a3a4a847371b80b8aaa09ba82d1c2a8f6b30450e392a1fe4",
+      "pages": 16,
+      "chunks": 108,
+      "table_chunks": 2,
+      "parse_seconds": 1.4992017500044312,
+      "embedding_seconds": 1.629121292004129,
+      "warnings": [
+        "第 2 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 2 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 2 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 2 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 2 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 2 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 2 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 2 页含 5 个图片对象；图片内容尚未进入检索。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 6 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 7 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 7 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 8 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 8 页含 36 个图片对象；图片内容尚未进入检索。",
+        "阅读顺序和横线表格按坐标启发式恢复；多层表头、完全无边框表格、公式和复杂版式仍需原文核对。"
+      ]
+    },
+    {
+      "id": "efficientnet",
+      "sha256": "f82da3f7dfb827fe701fae2088f3653e17cb3216ef61111be1167f01dcc92137",
+      "pages": 10,
+      "chunks": 74,
+      "table_chunks": 6,
+      "parse_seconds": 0.8393377089814749,
+      "embedding_seconds": 1.13256625001668,
+      "warnings": [
+        "第 7 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 8 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 8 页含 12 个图片对象；图片内容尚未进入检索。",
+        "阅读顺序和横线表格按坐标启发式恢复；多层表头、完全无边框表格、公式和复杂版式仍需原文核对。"
+      ]
+    }
+  ],
+  "retrievers": {
+    "bm25": {
+      "summary": {
+        "answerable_queries": 24,
+        "evidence_recall_at_k": 0.75,
+        "bound_cell_recall_at_k": 0.8333333333333334,
+        "by_language": {
+          "en": 0.9166666666666666,
+          "zh": 0.5833333333333334
+        },
+        "by_paper": {
+          "clip": 0.75,
+          "efficientnet": 0.75,
+          "simclr": 0.75
+        }
+      },
+      "rows": [
+        {
+          "id": "simclr-batch-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "What is the largest training batch size explored by SimCLR?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 8.612501551397145e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6f8ef5bd06e79864",
+              "page": 3,
+              "kind": "text",
+              "score": 8.385579771227896,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "a176482c9a6b3f0a",
+              "page": 3,
+              "kind": "text",
+              "score": 6.880782202114434,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "5f07662ad4d3d507",
+              "page": 7,
+              "kind": "text",
+              "score": 6.551945710593532,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "simclr-batch-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "SimCLR 探索的最大训练批量是多少？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 8.820800576359034e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "c9e442fd3ddb4c0f",
+              "page": 8,
+              "kind": "text",
+              "score": 3.340759551840972,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 2.979406351157836,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "91d1abb080fadc27",
+              "page": 2,
+              "kind": "text",
+              "score": 2.7122871610540304,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "simclr-optimizer-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "Which optimizer stabilizes SimCLR training across batch sizes?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 6.829199264757335e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "a176482c9a6b3f0a",
+              "page": 3,
+              "kind": "text",
+              "score": 12.621877986093539,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "bc3292b24001cd88",
+              "page": 7,
+              "kind": "text",
+              "score": 9.251712211509954,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "91d1abb080fadc27",
+              "page": 2,
+              "kind": "text",
+              "score": 6.8304824669724695,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "simclr-optimizer-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "SimCLR 使用哪种优化器稳定不同批量的训练？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 9.700001101009548e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "c9e442fd3ddb4c0f",
+              "page": 8,
+              "kind": "text",
+              "score": 3.340759551840972,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 2.979406351157836,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "91d1abb080fadc27",
+              "page": 2,
+              "kind": "text",
+              "score": 2.7122871610540304,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50-top1-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "In Table 6, what is the linear evaluation Top 1 accuracy of SimCLR with ResNet-50 (1x)?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.00010183299309574068,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 18.250373688996827,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 18.248718939169205,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "837bdf59aa350abd",
+              "page": 5,
+              "kind": "text",
+              "score": 17.05321187418368,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50-top1-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "表 6 中，SimCLR 使用 ResNet-50（1 倍宽度）的线性评估 Top 1 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.00013050000416114926,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 15.606580757917158,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 13.834437798697838,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "837bdf59aa350abd",
+              "page": 5,
+              "kind": "text",
+              "score": 10.112548669797256,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50x4-top1-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "In Table 6, what Top 1 accuracy does SimCLR ResNet-50 (4x) achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 8.362499647773802e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "837bdf59aa350abd",
+              "page": 5,
+              "kind": "text",
+              "score": 19.119819032593277,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 17.414727880564957,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 17.09544659287221,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50x4-top1-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "表 6 中，SimCLR ResNet-50（4 倍宽度）的 Top 1 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.00010866697994060814,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 18.583179810135256,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 16.353951724834985,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "837bdf59aa350abd",
+              "page": 5,
+              "kind": "text",
+              "score": 11.890434292461704,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "simclr-unanswerable",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 6.529100937768817e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "bc3292b24001cd88",
+              "page": 7,
+              "kind": "text",
+              "score": 4.592900112339926,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "a176482c9a6b3f0a",
+              "page": 3,
+              "kind": "text",
+              "score": 3.690354537544038,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "8b345d5af4b25a5c",
+              "page": 4,
+              "kind": "text",
+              "score": 3.675828769400729,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "clip-data-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "How many image-text pairs are used to pre-train CLIP?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00015183398500084877,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "298439bb0bc1ad30",
+              "page": 2,
+              "kind": "text",
+              "score": 13.428875403145078,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "c04969110b194c59",
+              "page": 3,
+              "kind": "text",
+              "score": 12.267731147762264,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "5271dfa33e84a2ed",
+              "page": 1,
+              "kind": "text",
+              "score": 11.20154902581451,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "clip-data-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "CLIP 预训练使用了多少图文对？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0001362919865641743,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "9f19ceac58555aa8",
+              "page": 5,
+              "kind": "text",
+              "score": 2.192074756670109,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "13eafe96e468812c",
+              "page": 4,
+              "kind": "table",
+              "score": 2.1165638161827807,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "da9f723923d74c16",
+              "page": 8,
+              "kind": "text",
+              "score": 2.095491308845373,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "clip-layers-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "How many layers does the base CLIP text transformer have?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0001284580212086439,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "968bec932e2ad415",
+              "page": 4,
+              "kind": "text",
+              "score": 8.784566931146655,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "9f8cf78f6a0efe1b",
+              "page": 3,
+              "kind": "text",
+              "score": 7.431965997208119,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "57b13c2762efe013",
+              "page": 3,
+              "kind": "text",
+              "score": 7.198419951711069,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "clip-layers-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "CLIP 基础文本 Transformer 有多少层？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00012433298979885876,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "57b13c2762efe013",
+              "page": 3,
+              "kind": "text",
+              "score": 4.460728274133125,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "626756b15d6556f8",
+              "page": 3,
+              "kind": "text",
+              "score": 3.646351089413231,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "39e6e14592009725",
+              "page": 4,
+              "kind": "text",
+              "score": 3.5846967135847327,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "clip-imagenet-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "In Table 1, what is CLIP zero-shot ImageNet accuracy?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.00012995797442272305,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "13eafe96e468812c",
+              "page": 4,
+              "kind": "table",
+              "score": 13.387058285989578,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "0f31e17b31466172",
+              "page": 4,
+              "kind": "text",
+              "score": 12.614108000753296,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "18cdc674e4b186c5",
+              "page": 7,
+              "kind": "text",
+              "score": 10.855407987927768,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "clip-imagenet-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "表 1 中，CLIP 在 ImageNet 上的零样本准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.00017987500177696347,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "484841c0215af43b",
+              "page": 8,
+              "kind": "text",
+              "score": 6.491002013942383,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "13eafe96e468812c",
+              "page": 4,
+              "kind": "table",
+              "score": 5.767958747674694,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "7825325b240994fc",
+              "page": 6,
+              "kind": "text",
+              "score": 4.431487887078729,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "clip-ngram-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "In Table 1, what is Visual N-Grams zero-shot ImageNet accuracy?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.00014899999951012433,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "13eafe96e468812c",
+              "page": 4,
+              "kind": "table",
+              "score": 20.169213380465987,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "0f31e17b31466172",
+              "page": 4,
+              "kind": "text",
+              "score": 18.612105972002645,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 15.941882872932684,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "clip-ngram-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "表 1 中，Visual N-Grams 在 ImageNet 上的零样本准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.00018883301527239382,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "13eafe96e468812c",
+              "page": 4,
+              "kind": "table",
+              "score": 12.550113842151102,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 9.897894649654909,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "0f31e17b31466172",
+              "page": 4,
+              "kind": "text",
+              "score": 9.769872959373878,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "clip-unanswerable",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00010483400546945632,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6c35b53a27efd91e",
+              "page": 9,
+              "kind": "text",
+              "score": 6.043538895373567,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "7825325b240994fc",
+              "page": 6,
+              "kind": "text",
+              "score": 5.963313060701491,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "5271dfa33e84a2ed",
+              "page": 1,
+              "kind": "text",
+              "score": 5.178004630785377,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-block-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "What is the main building block of EfficientNet-B0?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0001016249880194664,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "bebec4cf4dadc8bf",
+              "page": 5,
+              "kind": "text",
+              "score": 11.284462448017386,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "a0dfe55738d046c9",
+              "page": 7,
+              "kind": "text",
+              "score": 4.517682337821833,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "deea71acd179c8e8",
+              "page": 7,
+              "kind": "text",
+              "score": 3.795835357977209,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-block-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "EfficientNet-B0 的主要网络构建模块是什么？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00010570898302830756,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "a0dfe55738d046c9",
+              "page": 7,
+              "kind": "text",
+              "score": 4.517682337821833,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "bebec4cf4dadc8bf",
+              "page": 5,
+              "kind": "text",
+              "score": 3.949365223544759,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "deea71acd179c8e8",
+              "page": 7,
+              "kind": "text",
+              "score": 3.795835357977209,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-optimizer-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "Which optimizer is used for training EfficientNet on ImageNet?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 6.966700311750174e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "f746a2fd62e8213a",
+              "page": 7,
+              "kind": "text",
+              "score": 7.825108336136422,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "6998a9bd11b004c7",
+              "page": 6,
+              "kind": "text",
+              "score": 5.763819650792371,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "b3eed84994da1a33",
+              "page": 8,
+              "kind": "text",
+              "score": 5.029927702724373,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-optimizer-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "EfficientNet 在 ImageNet 上训练时使用什么优化器？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00010754101094789803,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "ec1ec3af37607b92",
+              "page": 6,
+              "kind": "text",
+              "score": 3.381593848642126,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "6998a9bd11b004c7",
+              "page": 6,
+              "kind": "text",
+              "score": 3.357504856877817,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "b3eed84994da1a33",
+              "page": 8,
+              "kind": "text",
+              "score": 3.105492324156704,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b0-top1-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "In Table 2, what ImageNet Top-1 accuracy does EfficientNet-B0 achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.00010966698755510151,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "ec1ec3af37607b92",
+              "page": 6,
+              "kind": "text",
+              "score": 13.767782930876237,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "f2ca9c6782545f02",
+              "page": 6,
+              "kind": "table",
+              "score": 12.684077184320664,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "deea71acd179c8e8",
+              "page": 7,
+              "kind": "text",
+              "score": 11.596536319348184,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b0-top1-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "表 2 中，EfficientNet-B0 的 ImageNet Top-1 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.0001119170046877116,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "ec1ec3af37607b92",
+              "page": 6,
+              "kind": "text",
+              "score": 11.18062329078764,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "f2ca9c6782545f02",
+              "page": 6,
+              "kind": "table",
+              "score": 10.653582778624655,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "62732ba42a59ea91",
+              "page": 6,
+              "kind": "table",
+              "score": 9.131969379679362,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b7-params-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "In Table 2, how many parameters does EfficientNet-B7 have?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 8.516700472682714e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "deea71acd179c8e8",
+              "page": 7,
+              "kind": "text",
+              "score": 8.896870494654937,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "f746a2fd62e8213a",
+              "page": 7,
+              "kind": "text",
+              "score": 7.853055260608587,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "f2ca9c6782545f02",
+              "page": 6,
+              "kind": "table",
+              "score": 7.37963501654599,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b7-params-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "表 2 中，EfficientNet-B7 有多少参数？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 8.045899448916316e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "35289b70e2344100",
+              "page": 7,
+              "kind": "text",
+              "score": 6.147416516197832,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "bebec4cf4dadc8bf",
+              "page": 5,
+              "kind": "text",
+              "score": 5.413005261891943,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "deea71acd179c8e8",
+              "page": 7,
+              "kind": "text",
+              "score": 5.294084419495519,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-unanswerable",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 6.399999256245792e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "f746a2fd62e8213a",
+              "page": 7,
+              "kind": "text",
+              "score": 5.043519731061586,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "77754ed3ff39d801",
+              "page": 3,
+              "kind": "text",
+              "score": 4.763947351915952,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "1b28f0b577e0a6f5",
+              "page": 8,
+              "kind": "text",
+              "score": 4.1179519471171036,
+              "score_kind": "bm25"
+            }
+          ]
+        }
+      ]
+    },
+    "dense": {
+      "summary": {
+        "answerable_queries": 24,
+        "evidence_recall_at_k": 0.375,
+        "bound_cell_recall_at_k": 0.5833333333333334,
+        "by_language": {
+          "en": 0.5,
+          "zh": 0.25
+        },
+        "by_paper": {
+          "clip": 0.125,
+          "efficientnet": 0.375,
+          "simclr": 0.625
+        }
+      },
+      "rows": [
+        {
+          "id": "simclr-batch-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "What is the largest training batch size explored by SimCLR?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00528870799462311,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "bc3292b24001cd88",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8610305786132812,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "6f8ef5bd06e79864",
+              "page": 3,
+              "kind": "text",
+              "score": 0.8606748580932617,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "0ed7fe7176d656e7",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8574934005737305,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "simclr-batch-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "SimCLR 探索的最大训练批量是多少？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0051376250048633665,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "0ed7fe7176d656e7",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8548966646194458,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "c9e442fd3ddb4c0f",
+              "page": 8,
+              "kind": "text",
+              "score": 0.8520913124084473,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.8435157537460327,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "simclr-optimizer-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "Which optimizer stabilizes SimCLR training across batch sizes?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004959041980328038,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6f8ef5bd06e79864",
+              "page": 3,
+              "kind": "text",
+              "score": 0.8688502311706543,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "0ed7fe7176d656e7",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8670582175254822,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "bc3292b24001cd88",
+              "page": 7,
+              "kind": "text",
+              "score": 0.864798367023468,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "simclr-optimizer-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "SimCLR 使用哪种优化器稳定不同批量的训练？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0049077909789048135,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "c9e442fd3ddb4c0f",
+              "page": 8,
+              "kind": "text",
+              "score": 0.8553564548492432,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "0ed7fe7176d656e7",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8536773920059204,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.8457189202308655,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50-top1-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "In Table 6, what is the linear evaluation Top 1 accuracy of SimCLR with ResNet-50 (1x)?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005245875014225021,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.896588146686554,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "0ed7fe7176d656e7",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8847283124923706,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8820801377296448,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50-top1-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "表 6 中，SimCLR 使用 ResNet-50（1 倍宽度）的线性评估 Top 1 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.006216083012986928,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.886979341506958,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "c9e442fd3ddb4c0f",
+              "page": 8,
+              "kind": "text",
+              "score": 0.8803713321685791,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8705974817276001,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50x4-top1-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "In Table 6, what Top 1 accuracy does SimCLR ResNet-50 (4x) achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005185290996450931,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.8974193334579468,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8871520757675171,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "0ed7fe7176d656e7",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8770732879638672,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50x4-top1-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "表 6 中，SimCLR ResNet-50（4 倍宽度）的 Top 1 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005302040983224288,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.8767787218093872,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8609249591827393,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "54363d3c9fce81fd",
+              "page": 8,
+              "kind": "text",
+              "score": 0.8598164916038513,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "simclr-unanswerable",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0049265830020885915,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6f8ef5bd06e79864",
+              "page": 3,
+              "kind": "text",
+              "score": 0.8169674277305603,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.8065890073776245,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "edb54c69f8538931",
+              "page": 9,
+              "kind": "text",
+              "score": 0.8024102449417114,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "clip-data-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "How many image-text pairs are used to pre-train CLIP?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005857916985405609,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "8fec3baedb4f267a",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8810086250305176,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "c04969110b194c59",
+              "page": 3,
+              "kind": "text",
+              "score": 0.8592590689659119,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "57b13c2762efe013",
+              "page": 3,
+              "kind": "text",
+              "score": 0.8561240434646606,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "clip-data-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "CLIP 预训练使用了多少图文对？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005602792021818459,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "5823b01c70e5666b",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8791651725769043,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "27e62a739d69be2a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8679323196411133,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 0.8517427444458008,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "clip-layers-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "How many layers does the base CLIP text transformer have?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0053406659862957895,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "39e6e14592009725",
+              "page": 4,
+              "kind": "text",
+              "score": 0.8529046773910522,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "8fec3baedb4f267a",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8520030975341797,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "57b13c2762efe013",
+              "page": 3,
+              "kind": "text",
+              "score": 0.8500054478645325,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "clip-layers-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "CLIP 基础文本 Transformer 有多少层？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005310709006153047,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "5823b01c70e5666b",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8651517629623413,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "57b13c2762efe013",
+              "page": 3,
+              "kind": "text",
+              "score": 0.8511486053466797,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "39e6e14592009725",
+              "page": 4,
+              "kind": "text",
+              "score": 0.8493725657463074,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "clip-imagenet-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "In Table 1, what is CLIP zero-shot ImageNet accuracy?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.005623167002340779,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "18cdc674e4b186c5",
+              "page": 7,
+              "kind": "text",
+              "score": 0.9221172332763672,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "22b50e04f454329b",
+              "page": 8,
+              "kind": "text",
+              "score": 0.9155611395835876,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 0.9036487340927124,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "clip-imagenet-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "表 1 中，CLIP 在 ImageNet 上的零样本准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.005445791000965983,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "88de5008e899fd1e",
+              "page": 8,
+              "kind": "text",
+              "score": 0.9014250040054321,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 0.8904014825820923,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "5823b01c70e5666b",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8869416117668152,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "clip-ngram-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "In Table 1, what is Visual N-Grams zero-shot ImageNet accuracy?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005191958014620468,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 0.8908309936523438,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "13eafe96e468812c",
+              "page": 4,
+              "kind": "table",
+              "score": 0.8795950412750244,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "e9b08afbd0a2abd6",
+              "page": 5,
+              "kind": "text",
+              "score": 0.8786634802818298,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "clip-ngram-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "表 1 中，Visual N-Grams 在 ImageNet 上的零样本准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.005550875008339062,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 0.8779191374778748,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "88de5008e899fd1e",
+              "page": 8,
+              "kind": "text",
+              "score": 0.8703585863113403,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "751cb56b01e0d48e",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8677506446838379,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "clip-unanswerable",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005037291994085535,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "8fec3baedb4f267a",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8225158452987671,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "7a2b99d85183caf3",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8211946487426758,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "18cdc674e4b186c5",
+              "page": 7,
+              "kind": "text",
+              "score": 0.816850483417511,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-block-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "What is the main building block of EfficientNet-B0?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005362833006074652,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "49ee67432242ad33",
+              "page": 5,
+              "kind": "text",
+              "score": 0.8777422904968262,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "bebec4cf4dadc8bf",
+              "page": 5,
+              "kind": "text",
+              "score": 0.8664497137069702,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "669b7cbe75bc68d2",
+              "page": 5,
+              "kind": "text",
+              "score": 0.8593820333480835,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-block-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "EfficientNet-B0 的主要网络构建模块是什么？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004984833009075373,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "e501243e32a59486",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8666630983352661,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "747fcb6ed7ce9f4c",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8558120727539062,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "35289b70e2344100",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8530313372612,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-optimizer-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "Which optimizer is used for training EfficientNet on ImageNet?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004985249979654327,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "1a85aaaff34d255b",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8808083534240723,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "62732ba42a59ea91",
+              "page": 6,
+              "kind": "table",
+              "score": 0.879453718662262,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "34287d902c415efc",
+              "page": 6,
+              "kind": "table",
+              "score": 0.8793885707855225,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-optimizer-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "EfficientNet 在 ImageNet 上训练时使用什么优化器？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004964041989296675,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "e501243e32a59486",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8873533606529236,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "7e46657c72833ad9",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8857381343841553,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "1a85aaaff34d255b",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8701696395874023,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b0-top1-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "In Table 2, what ImageNet Top-1 accuracy does EfficientNet-B0 achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005197833001147956,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "62732ba42a59ea91",
+              "page": 6,
+              "kind": "table",
+              "score": 0.8931888937950134,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "34287d902c415efc",
+              "page": 6,
+              "kind": "table",
+              "score": 0.8921725749969482,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "f2ca9c6782545f02",
+              "page": 6,
+              "kind": "table",
+              "score": 0.8869285583496094,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b0-top1-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "表 2 中，EfficientNet-B0 的 ImageNet Top-1 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005222084000706673,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "34287d902c415efc",
+              "page": 6,
+              "kind": "table",
+              "score": 0.879178524017334,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "62732ba42a59ea91",
+              "page": 6,
+              "kind": "table",
+              "score": 0.8780032396316528,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "f2ca9c6782545f02",
+              "page": 6,
+              "kind": "table",
+              "score": 0.8774585127830505,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b7-params-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "In Table 2, how many parameters does EfficientNet-B7 have?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.005160999979125336,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "1a85aaaff34d255b",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8810324668884277,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "35289b70e2344100",
+              "page": 7,
+              "kind": "text",
+              "score": 0.87744140625,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "34287d902c415efc",
+              "page": 6,
+              "kind": "table",
+              "score": 0.8688666820526123,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b7-params-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "表 2 中，EfficientNet-B7 有多少参数？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.005060291005065665,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "35289b70e2344100",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8870885372161865,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "e501243e32a59486",
+              "page": 7,
+              "kind": "text",
+              "score": 0.876237154006958,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "747fcb6ed7ce9f4c",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8688878417015076,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-unanswerable",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004958000004990026,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "52cb8b43636d615e",
+              "page": 8,
+              "kind": "table",
+              "score": 0.8091940879821777,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "f746a2fd62e8213a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8078392148017883,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "f96d7370d5cee687",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8034579157829285,
+              "score_kind": "cosine"
+            }
+          ]
+        }
+      ]
+    },
+    "hybrid": {
+      "summary": {
+        "answerable_queries": 24,
+        "evidence_recall_at_k": 0.5833333333333334,
+        "bound_cell_recall_at_k": 0.75,
+        "by_language": {
+          "en": 0.75,
+          "zh": 0.4166666666666667
+        },
+        "by_paper": {
+          "clip": 0.5,
+          "efficientnet": 0.625,
+          "simclr": 0.625
+        }
+      },
+      "rows": [
+        {
+          "id": "simclr-batch-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "What is the largest training batch size explored by SimCLR?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0051364999962970614,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6f8ef5bd06e79864",
+              "page": 3,
+              "kind": "text",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "bc3292b24001cd88",
+              "page": 7,
+              "kind": "text",
+              "score": 0.032018442622950824,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "91d1abb080fadc27",
+              "page": 2,
+              "kind": "text",
+              "score": 0.031009615384615385,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "simclr-batch-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "SimCLR 探索的最大训练批量是多少？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005061000003479421,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "c9e442fd3ddb4c0f",
+              "page": 8,
+              "kind": "text",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "91d1abb080fadc27",
+              "page": 2,
+              "kind": "text",
+              "score": 0.03149801587301587,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "simclr-optimizer-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "Which optimizer stabilizes SimCLR training across batch sizes?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005074582993984222,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "bc3292b24001cd88",
+              "page": 7,
+              "kind": "text",
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "0ed7fe7176d656e7",
+              "page": 1,
+              "kind": "text",
+              "score": 0.0315136476426799,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "6f8ef5bd06e79864",
+              "page": 3,
+              "kind": "text",
+              "score": 0.03131881575727918,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "simclr-optimizer-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "SimCLR 使用哪种优化器稳定不同批量的训练？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004957750003086403,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "c9e442fd3ddb4c0f",
+              "page": 8,
+              "kind": "text",
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "91d1abb080fadc27",
+              "page": 2,
+              "kind": "text",
+              "score": 0.03149801587301587,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50-top1-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "In Table 6, what is the linear evaluation Top 1 accuracy of SimCLR with ResNet-50 (1x)?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005334457993740216,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "0ed7fe7176d656e7",
+              "page": 1,
+              "kind": "text",
+              "score": 0.0315136476426799,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50-top1-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "表 6 中，SimCLR 使用 ResNet-50（1 倍宽度）的线性评估 Top 1 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.006256666005356237,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "0ed7fe7176d656e7",
+              "page": 1,
+              "kind": "text",
+              "score": 0.031009615384615385,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50x4-top1-en",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "In Table 6, what Top 1 accuracy does SimCLR ResNet-50 (4x) achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.0053417920134961605,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.03225806451612903,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "837bdf59aa350abd",
+              "page": 5,
+              "kind": "text",
+              "score": 0.03177805800756621,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "simclr-r50x4-top1-zh",
+          "paper_id": "simclr",
+          "language": "zh",
+          "question": "表 6 中，SimCLR ResNet-50（4 倍宽度）的 Top 1 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005320665979525074,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb8863ef264f0f61",
+              "page": 7,
+              "kind": "table",
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "e83f9ba45575ee7a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.03225806451612903,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "54363d3c9fce81fd",
+              "page": 8,
+              "kind": "text",
+              "score": 0.030798389007344232,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "simclr-unanswerable",
+          "paper_id": "simclr",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005001999990781769,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "bc3292b24001cd88",
+              "page": 7,
+              "kind": "text",
+              "score": 0.03177805800756621,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "a176482c9a6b3f0a",
+              "page": 3,
+              "kind": "text",
+              "score": 0.031754032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "d58b2c6d7e70549f",
+              "page": 2,
+              "kind": "text",
+              "score": 0.02967032967032967,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "clip-data-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "How many image-text pairs are used to pre-train CLIP?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005771041993284598,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "c04969110b194c59",
+              "page": 3,
+              "kind": "text",
+              "score": 0.03225806451612903,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "39e6e14592009725",
+              "page": 4,
+              "kind": "text",
+              "score": 0.031009615384615385,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "8fec3baedb4f267a",
+              "page": 2,
+              "kind": "text",
+              "score": 0.030679156908665108,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "clip-data-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "CLIP 预训练使用了多少图文对？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00556966700241901,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "5823b01c70e5666b",
+              "page": 7,
+              "kind": "text",
+              "score": 0.03131881575727918,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "13eafe96e468812c",
+              "page": 4,
+              "kind": "table",
+              "score": 0.031054405392392875,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "27e62a739d69be2a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.0304147465437788,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "clip-layers-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "How many layers does the base CLIP text transformer have?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005615583009785041,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "57b13c2762efe013",
+              "page": 3,
+              "kind": "text",
+              "score": 0.031746031746031744,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "968bec932e2ad415",
+              "page": 4,
+              "kind": "text",
+              "score": 0.031544957774465976,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "f70b1b2ee7653a3a",
+              "page": 1,
+              "kind": "text",
+              "score": 0.03125,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "clip-layers-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "CLIP 基础文本 Transformer 有多少层？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0052610840066336095,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "57b13c2762efe013",
+              "page": 3,
+              "kind": "text",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "39e6e14592009725",
+              "page": 4,
+              "kind": "text",
+              "score": 0.031746031746031744,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9f8cf78f6a0efe1b",
+              "page": 3,
+              "kind": "text",
+              "score": 0.03055037313432836,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "clip-imagenet-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "In Table 1, what is CLIP zero-shot ImageNet accuracy?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005707333009922877,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "18cdc674e4b186c5",
+              "page": 7,
+              "kind": "text",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 0.03149801587301587,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "13eafe96e468812c",
+              "page": 4,
+              "kind": "table",
+              "score": 0.03047794966520434,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "clip-imagenet-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "表 1 中，CLIP 在 ImageNet 上的零样本准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.005491457995958626,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "484841c0215af43b",
+              "page": 8,
+              "kind": "text",
+              "score": 0.03177805800756621,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 0.0315136476426799,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "7825325b240994fc",
+              "page": 6,
+              "kind": "text",
+              "score": 0.031024531024531024,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "clip-ngram-en",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "In Table 1, what is Visual N-Grams zero-shot ImageNet accuracy?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005491875024745241,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "13eafe96e468812c",
+              "page": 4,
+              "kind": "table",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "e9b08afbd0a2abd6",
+              "page": 5,
+              "kind": "text",
+              "score": 0.03149801587301587,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "clip-ngram-zh",
+          "paper_id": "clip",
+          "language": "zh",
+          "question": "表 1 中，Visual N-Grams 在 ImageNet 上的零样本准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005678332992829382,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "033e1ccafbd862e7",
+              "page": 4,
+              "kind": "text",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "13eafe96e468812c",
+              "page": 4,
+              "kind": "table",
+              "score": 0.031544957774465976,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "484841c0215af43b",
+              "page": 8,
+              "kind": "text",
+              "score": 0.03076923076923077,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "clip-unanswerable",
+          "paper_id": "clip",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00540495800669305,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6c35b53a27efd91e",
+              "page": 9,
+              "kind": "text",
+              "score": 0.03131881575727918,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "7a2b99d85183caf3",
+              "page": 2,
+              "kind": "text",
+              "score": 0.030834914611005692,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "12a3042664abd181",
+              "page": 8,
+              "kind": "text",
+              "score": 0.030117753623188408,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-block-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "What is the main building block of EfficientNet-B0?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005129707977175713,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "bebec4cf4dadc8bf",
+              "page": 5,
+              "kind": "text",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "49ee67432242ad33",
+              "page": 5,
+              "kind": "text",
+              "score": 0.03177805800756621,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "a0dfe55738d046c9",
+              "page": 7,
+              "kind": "text",
+              "score": 0.030621785881252923,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-block-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "EfficientNet-B0 的主要网络构建模块是什么？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0051176669949200004,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "a0dfe55738d046c9",
+              "page": 7,
+              "kind": "text",
+              "score": 0.031544957774465976,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "bebec4cf4dadc8bf",
+              "page": 5,
+              "kind": "text",
+              "score": 0.030834914611005692,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "49ee67432242ad33",
+              "page": 5,
+              "kind": "text",
+              "score": 0.03076923076923077,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-optimizer-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "Which optimizer is used for training EfficientNet on ImageNet?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004955750016961247,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "f746a2fd62e8213a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.032018442622950824,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "1a85aaaff34d255b",
+              "page": 2,
+              "kind": "text",
+              "score": 0.03177805800756621,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "6998a9bd11b004c7",
+              "page": 6,
+              "kind": "text",
+              "score": 0.030834914611005692,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-optimizer-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "EfficientNet 在 ImageNet 上训练时使用什么优化器？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005132666992722079,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "ec1ec3af37607b92",
+              "page": 6,
+              "kind": "text",
+              "score": 0.030679156908665108,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "34287d902c415efc",
+              "page": 6,
+              "kind": "table",
+              "score": 0.030536130536130537,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "f2ca9c6782545f02",
+              "page": 6,
+              "kind": "table",
+              "score": 0.030117753623188408,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b0-top1-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "In Table 2, what ImageNet Top-1 accuracy does EfficientNet-B0 achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005299957992974669,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "f2ca9c6782545f02",
+              "page": 6,
+              "kind": "table",
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "62732ba42a59ea91",
+              "page": 6,
+              "kind": "table",
+              "score": 0.031544957774465976,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "75fac4d0a6072d8a",
+              "page": 1,
+              "kind": "text",
+              "score": 0.03125,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b0-top1-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "表 2 中，EfficientNet-B0 的 ImageNet Top-1 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005352624983061105,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "62732ba42a59ea91",
+              "page": 6,
+              "kind": "table",
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "f2ca9c6782545f02",
+              "page": 6,
+              "kind": "table",
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "34287d902c415efc",
+              "page": 6,
+              "kind": "table",
+              "score": 0.03177805800756621,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b7-params-en",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "In Table 2, how many parameters does EfficientNet-B7 have?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.005285583989461884,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "deea71acd179c8e8",
+              "page": 7,
+              "kind": "text",
+              "score": 0.03131881575727918,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "1a85aaaff34d255b",
+              "page": 2,
+              "kind": "text",
+              "score": 0.030679156908665108,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "35289b70e2344100",
+              "page": 7,
+              "kind": "text",
+              "score": 0.030621785881252923,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-b7-params-zh",
+          "paper_id": "efficientnet",
+          "language": "zh",
+          "question": "表 2 中，EfficientNet-B7 有多少参数？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.005201874999329448,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "35289b70e2344100",
+              "page": 7,
+              "kind": "text",
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "1a85aaaff34d255b",
+              "page": 2,
+              "kind": "text",
+              "score": 0.030776515151515152,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "bebec4cf4dadc8bf",
+              "page": 5,
+              "kind": "text",
+              "score": 0.030621785881252923,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "efficientnet-unanswerable",
+          "paper_id": "efficientnet",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004986125015420839,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "f746a2fd62e8213a",
+              "page": 7,
+              "kind": "text",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "77754ed3ff39d801",
+              "page": 3,
+              "kind": "text",
+              "score": 0.030621785881252923,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "1b28f0b577e0a6f5",
+              "page": 8,
+              "kind": "text",
+              "score": 0.03057889822595705,
+              "score_kind": "rrf"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "limitations": "Development data used while improving the parser, not a held-out benchmark. Only three related computer-vision papers from one publisher; 12 facts paired across languages. Annotations need independent human review. Evidence recall is not answer accuracy or semantic support. Unanswerable probe candidate counts do not measure hallucinations or abstention."
+}

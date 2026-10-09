@@ -1,0 +1,1086 @@
+{
+  "dataset": "fictional multilingual smoke-test fixture",
+  "document_sha256": "b2055372eb012f98bcad7383528c4d8b9ba382f7553dc67eabad14836bef0b12",
+  "qa_sha256": "5c84f94207c094421b244c49da0e7552464cd5b255cab19f6f96423f02ca195f",
+  "python": "3.12.14",
+  "model": {
+    "model_id": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "max_tokens": 512,
+    "window_overlap": 64,
+    "device": "cpu",
+    "adapter": "e5-token-windows-v1"
+  },
+  "index_sha256": "c1d9f961a7367f5195182196594a1e21140558e0ad16dd260c29bfae6e987c5d",
+  "embedding_preparation_seconds": 3.011697042005835,
+  "k": 3,
+  "chunks": 8,
+  "chunk_chars": 1400,
+  "metric": "fraction of annotated page/quote pairs fully present in at least one top-k chunk",
+  "retrievers": {
+    "bm25": {
+      "mean_evidence_recall_at_k": 0.5,
+      "by_language": {
+        "en": 1.0,
+        "zh": 0.0
+      },
+      "queries": 14,
+      "query_seconds": 0.00014591700164601207,
+      "rows": [
+        {
+          "id": "dataset-en",
+          "pair_id": "dataset",
+          "language": "en",
+          "question": "What dataset is used?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "47b752fc57dbc50a",
+              "page": 1,
+              "score": 1.9689664497011592,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "dataset-zh",
+          "pair_id": "dataset",
+          "language": "zh",
+          "question": "论文使用了哪个数据集？",
+          "evidence_recall": 0.0,
+          "hits": []
+        },
+        {
+          "id": "train-size-en",
+          "pair_id": "train-size",
+          "language": "en",
+          "question": "How many examples are in the synthetic training set?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 4.759293745865537,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "eb72811bb511c2c3",
+              "page": 1,
+              "score": 1.4076196103978729,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "train-size-zh",
+          "pair_id": "train-size",
+          "language": "zh",
+          "question": "合成训练集有多少个样本？",
+          "evidence_recall": 0.0,
+          "hits": []
+        },
+        {
+          "id": "metric-en",
+          "pair_id": "metric",
+          "language": "en",
+          "question": "What evaluation metric is used?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 2.197022799063415,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "df0f4094ac15cae2",
+              "page": 2,
+              "score": 1.3323234648193834,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "metric-zh",
+          "pair_id": "metric",
+          "language": "zh",
+          "question": "论文采用了哪种评估指标？",
+          "evidence_recall": 0.0,
+          "hits": []
+        },
+        {
+          "id": "accuracy-en",
+          "pair_id": "accuracy",
+          "language": "en",
+          "question": "What accuracy did the proposed method achieve?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 3.402005795138572,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 2.939243408036517,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 2.0259135633971272,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "accuracy-zh",
+          "pair_id": "accuracy",
+          "language": "zh",
+          "question": "提出的方法取得了多少准确率？",
+          "evidence_recall": 0.0,
+          "hits": []
+        },
+        {
+          "id": "baseline-en",
+          "pair_id": "baseline",
+          "language": "en",
+          "question": "What is the baseline accuracy?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 1.966254121064421,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 1.8674851161220096,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 1.1709153754653294,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "baseline-zh",
+          "pair_id": "baseline",
+          "language": "zh",
+          "question": "基线方法的准确率是多少？",
+          "evidence_recall": 0.0,
+          "hits": []
+        },
+        {
+          "id": "latency-en",
+          "pair_id": "latency",
+          "language": "en",
+          "question": "What is the proposed method latency?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 4.41934456404259,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 1.6930169684727168,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 1.3506090422647514,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "latency-zh",
+          "pair_id": "latency",
+          "language": "zh",
+          "question": "提出的方法推理延迟是多少？",
+          "evidence_recall": 0.0,
+          "hits": []
+        },
+        {
+          "id": "limitations-en",
+          "pair_id": "limitations",
+          "language": "en",
+          "question": "Does the demo include scanned documents?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "ddeac2aa5f02398e",
+              "page": 2,
+              "score": 6.753920628347346,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "eb72811bb511c2c3",
+              "page": 1,
+              "score": 1.0378698998251112,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.6753045211323757,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "limitations-zh",
+          "pair_id": "limitations",
+          "language": "zh",
+          "question": "这篇演示论文是否包含扫描文档？",
+          "evidence_recall": 0.0,
+          "hits": []
+        }
+      ]
+    },
+    "dense": {
+      "mean_evidence_recall_at_k": 1.0,
+      "by_language": {
+        "en": 1.0,
+        "zh": 1.0
+      },
+      "queries": 14,
+      "query_seconds": 0.07107183299376629,
+      "rows": [
+        {
+          "id": "dataset-en",
+          "pair_id": "dataset",
+          "language": "en",
+          "question": "What dataset is used?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "47b752fc57dbc50a",
+              "page": 1,
+              "score": 0.8414195775985718,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.8276042342185974,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "eb72811bb511c2c3",
+              "page": 1,
+              "score": 0.7998680472373962,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "dataset-zh",
+          "pair_id": "dataset",
+          "language": "zh",
+          "question": "论文使用了哪个数据集？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "47b752fc57dbc50a",
+              "page": 1,
+              "score": 0.8054085969924927,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.7896887063980103,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.7841019630432129,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "train-size-en",
+          "pair_id": "train-size",
+          "language": "en",
+          "question": "How many examples are in the synthetic training set?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.8588460683822632,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "eb72811bb511c2c3",
+              "page": 1,
+              "score": 0.7834026217460632,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.7709841728210449,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "train-size-zh",
+          "pair_id": "train-size",
+          "language": "zh",
+          "question": "合成训练集有多少个样本？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.8116534948348999,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.7828799486160278,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "eb72811bb511c2c3",
+              "page": 1,
+              "score": 0.7576130628585815,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "metric-en",
+          "pair_id": "metric",
+          "language": "en",
+          "question": "What evaluation metric is used?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.8536303043365479,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.794736921787262,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "df0f4094ac15cae2",
+              "page": 2,
+              "score": 0.7910062074661255,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "metric-zh",
+          "pair_id": "metric",
+          "language": "zh",
+          "question": "论文采用了哪种评估指标？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.8045792579650879,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.786074161529541,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.7850569486618042,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "accuracy-en",
+          "pair_id": "accuracy",
+          "language": "en",
+          "question": "What accuracy did the proposed method achieve?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.8637568950653076,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.8434415459632874,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.8204324841499329,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "accuracy-zh",
+          "pair_id": "accuracy",
+          "language": "zh",
+          "question": "提出的方法取得了多少准确率？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.8278565406799316,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.8048774003982544,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.7782735228538513,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "baseline-en",
+          "pair_id": "baseline",
+          "language": "en",
+          "question": "What is the baseline accuracy?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.8769634366035461,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.871860921382904,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.8295523524284363,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "baseline-zh",
+          "pair_id": "baseline",
+          "language": "zh",
+          "question": "基线方法的准确率是多少？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.8320435881614685,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.7872105836868286,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.7804306745529175,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "latency-en",
+          "pair_id": "latency",
+          "language": "en",
+          "question": "What is the proposed method latency?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.8855746388435364,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.8027628660202026,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.7935768365859985,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "latency-zh",
+          "pair_id": "latency",
+          "language": "zh",
+          "question": "提出的方法推理延迟是多少？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.8157433271408081,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.7611701488494873,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.7491244077682495,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "limitations-en",
+          "pair_id": "limitations",
+          "language": "en",
+          "question": "Does the demo include scanned documents?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "ddeac2aa5f02398e",
+              "page": 2,
+              "score": 0.8876136541366577,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "47b752fc57dbc50a",
+              "page": 1,
+              "score": 0.854050874710083,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "eb72811bb511c2c3",
+              "page": 1,
+              "score": 0.8392386436462402,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "limitations-zh",
+          "pair_id": "limitations",
+          "language": "zh",
+          "question": "这篇演示论文是否包含扫描文档？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "ddeac2aa5f02398e",
+              "page": 2,
+              "score": 0.8399691581726074,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "47b752fc57dbc50a",
+              "page": 1,
+              "score": 0.8110549449920654,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.8085271120071411,
+              "score_kind": "cosine"
+            }
+          ]
+        }
+      ]
+    },
+    "hybrid": {
+      "mean_evidence_recall_at_k": 1.0,
+      "by_language": {
+        "en": 1.0,
+        "zh": 1.0
+      },
+      "queries": 14,
+      "query_seconds": 0.0730384589987807,
+      "rows": [
+        {
+          "id": "dataset-en",
+          "pair_id": "dataset",
+          "language": "en",
+          "question": "What dataset is used?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "47b752fc57dbc50a",
+              "page": 1,
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.016129032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "eb72811bb511c2c3",
+              "page": 1,
+              "score": 0.015873015873015872,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "dataset-zh",
+          "pair_id": "dataset",
+          "language": "zh",
+          "question": "论文使用了哪个数据集？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "47b752fc57dbc50a",
+              "page": 1,
+              "score": 0.01639344262295082,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.016129032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.015873015873015872,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "train-size-en",
+          "pair_id": "train-size",
+          "language": "en",
+          "question": "How many examples are in the synthetic training set?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "eb72811bb511c2c3",
+              "page": 1,
+              "score": 0.03225806451612903,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.015873015873015872,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "train-size-zh",
+          "pair_id": "train-size",
+          "language": "zh",
+          "question": "合成训练集有多少个样本？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.01639344262295082,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.016129032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "eb72811bb511c2c3",
+              "page": 1,
+              "score": 0.015873015873015872,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "metric-en",
+          "pair_id": "metric",
+          "language": "en",
+          "question": "What evaluation metric is used?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "df0f4094ac15cae2",
+              "page": 2,
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.016129032258064516,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "metric-zh",
+          "pair_id": "metric",
+          "language": "zh",
+          "question": "论文采用了哪种评估指标？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.01639344262295082,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.016129032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.015873015873015872,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "accuracy-en",
+          "pair_id": "accuracy",
+          "language": "en",
+          "question": "What accuracy did the proposed method achieve?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.03225806451612903,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.031746031746031744,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "accuracy-zh",
+          "pair_id": "accuracy",
+          "language": "zh",
+          "question": "提出的方法取得了多少准确率？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.01639344262295082,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.016129032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.015873015873015872,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "baseline-en",
+          "pair_id": "baseline",
+          "language": "en",
+          "question": "What is the baseline accuracy?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.03225806451612903,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.031746031746031744,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "baseline-zh",
+          "pair_id": "baseline",
+          "language": "zh",
+          "question": "基线方法的准确率是多少？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.01639344262295082,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.016129032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.015873015873015872,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "latency-en",
+          "pair_id": "latency",
+          "language": "en",
+          "question": "What is the proposed method latency?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "latency-zh",
+          "pair_id": "latency",
+          "language": "zh",
+          "question": "提出的方法推理延迟是多少？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.01639344262295082,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "75a813ea10cf103d",
+              "page": 2,
+              "score": 0.016129032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.015873015873015872,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "limitations-en",
+          "pair_id": "limitations",
+          "language": "en",
+          "question": "Does the demo include scanned documents?",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "ddeac2aa5f02398e",
+              "page": 2,
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "eb72811bb511c2c3",
+              "page": 1,
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b00be6e0b70ef729",
+              "page": 1,
+              "score": 0.03149801587301587,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "limitations-zh",
+          "pair_id": "limitations",
+          "language": "zh",
+          "question": "这篇演示论文是否包含扫描文档？",
+          "evidence_recall": 1.0,
+          "hits": [
+            {
+              "chunk_id": "ddeac2aa5f02398e",
+              "page": 2,
+              "score": 0.01639344262295082,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "47b752fc57dbc50a",
+              "page": 1,
+              "score": 0.016129032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "1d9e1d6badbe84d3",
+              "page": 2,
+              "score": 0.015873015873015872,
+              "score_kind": "rrf"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "unanswerable_probe": {
+    "bm25": [
+      {
+        "id": "unanswerable-1",
+        "question": "Which GPU model was used for training?",
+        "candidate_count": 1
+      },
+      {
+        "id": "unanswerable-2",
+        "question": "实验使用了哪款 GPU？",
+        "candidate_count": 0
+      },
+      {
+        "id": "unanswerable-3",
+        "question": "作者的联系邮箱是什么？",
+        "candidate_count": 0
+      }
+    ],
+    "dense": [
+      {
+        "id": "unanswerable-1",
+        "question": "Which GPU model was used for training?",
+        "candidate_count": 3
+      },
+      {
+        "id": "unanswerable-2",
+        "question": "实验使用了哪款 GPU？",
+        "candidate_count": 3
+      },
+      {
+        "id": "unanswerable-3",
+        "question": "作者的联系邮箱是什么？",
+        "candidate_count": 3
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "unanswerable-1",
+        "question": "Which GPU model was used for training?",
+        "candidate_count": 3
+      },
+      {
+        "id": "unanswerable-2",
+        "question": "实验使用了哪款 GPU？",
+        "candidate_count": 3
+      },
+      {
+        "id": "unanswerable-3",
+        "question": "作者的联系邮箱是什么？",
+        "candidate_count": 3
+      }
+    ]
+  },
+  "limitations": "Fictional data, seven facts paired in two languages, no held-out tuning split. Results do not establish real-paper performance, answer correctness or calibrated abstention. Dense retrieval can return candidates for unanswerable queries; candidate count is not hallucination rate."
+}

@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+.streamlit/
+data/
+eval/results.json
+*.log
+models/
+.cache/
+config.toml
+.DS_Store
+*.zip

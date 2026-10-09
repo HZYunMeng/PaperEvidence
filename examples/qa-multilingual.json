@@ -1,0 +1,208 @@
+[
+  {
+    "id": "dataset-en",
+    "question": "What dataset is used?",
+    "evidence": [
+      {
+        "page": 1,
+        "quote": "DemoQA"
+      }
+    ],
+    "pair_id": "dataset",
+    "language": "en",
+    "answerable": true
+  },
+  {
+    "id": "dataset-zh",
+    "question": "论文使用了哪个数据集？",
+    "evidence": [
+      {
+        "page": 1,
+        "quote": "DemoQA"
+      }
+    ],
+    "pair_id": "dataset",
+    "language": "zh",
+    "answerable": true
+  },
+  {
+    "id": "train-size-en",
+    "question": "How many examples are in the synthetic training set?",
+    "evidence": [
+      {
+        "page": 1,
+        "quote": "120 examples"
+      }
+    ],
+    "pair_id": "train-size",
+    "language": "en",
+    "answerable": true
+  },
+  {
+    "id": "train-size-zh",
+    "question": "合成训练集有多少个样本？",
+    "evidence": [
+      {
+        "page": 1,
+        "quote": "120 examples"
+      }
+    ],
+    "pair_id": "train-size",
+    "language": "zh",
+    "answerable": true
+  },
+  {
+    "id": "metric-en",
+    "question": "What evaluation metric is used?",
+    "evidence": [
+      {
+        "page": 1,
+        "quote": "exact-match accuracy"
+      }
+    ],
+    "pair_id": "metric",
+    "language": "en",
+    "answerable": true
+  },
+  {
+    "id": "metric-zh",
+    "question": "论文采用了哪种评估指标？",
+    "evidence": [
+      {
+        "page": 1,
+        "quote": "exact-match accuracy"
+      }
+    ],
+    "pair_id": "metric",
+    "language": "zh",
+    "answerable": true
+  },
+  {
+    "id": "accuracy-en",
+    "question": "What accuracy did the proposed method achieve?",
+    "evidence": [
+      {
+        "page": 2,
+        "quote": "91.2%"
+      }
+    ],
+    "pair_id": "accuracy",
+    "language": "en",
+    "answerable": true
+  },
+  {
+    "id": "accuracy-zh",
+    "question": "提出的方法取得了多少准确率？",
+    "evidence": [
+      {
+        "page": 2,
+        "quote": "91.2%"
+      }
+    ],
+    "pair_id": "accuracy",
+    "language": "zh",
+    "answerable": true
+  },
+  {
+    "id": "baseline-en",
+    "question": "What is the baseline accuracy?",
+    "evidence": [
+      {
+        "page": 2,
+        "quote": "82.4%"
+      }
+    ],
+    "pair_id": "baseline",
+    "language": "en",
+    "answerable": true
+  },
+  {
+    "id": "baseline-zh",
+    "question": "基线方法的准确率是多少？",
+    "evidence": [
+      {
+        "page": 2,
+        "quote": "82.4%"
+      }
+    ],
+    "pair_id": "baseline",
+    "language": "zh",
+    "answerable": true
+  },
+  {
+    "id": "latency-en",
+    "question": "What is the proposed method latency?",
+    "evidence": [
+      {
+        "page": 2,
+        "quote": "310 ms"
+      }
+    ],
+    "pair_id": "latency",
+    "language": "en",
+    "answerable": true
+  },
+  {
+    "id": "latency-zh",
+    "question": "提出的方法推理延迟是多少？",
+    "evidence": [
+      {
+        "page": 2,
+        "quote": "310 ms"
+      }
+    ],
+    "pair_id": "latency",
+    "language": "zh",
+    "answerable": true
+  },
+  {
+    "id": "limitations-en",
+    "question": "Does the demo include scanned documents?",
+    "evidence": [
+      {
+        "page": 2,
+        "quote": "does not include scanned documents"
+      }
+    ],
+    "pair_id": "limitations",
+    "language": "en",
+    "answerable": true
+  },
+  {
+    "id": "limitations-zh",
+    "question": "这篇演示论文是否包含扫描文档？",
+    "evidence": [
+      {
+        "page": 2,
+        "quote": "does not include scanned documents"
+      }
+    ],
+    "pair_id": "limitations",
+    "language": "zh",
+    "answerable": true
+  },
+  {
+    "id": "unanswerable-1",
+    "pair_id": "unanswerable",
+    "language": "en",
+    "question": "Which GPU model was used for training?",
+    "answerable": false,
+    "evidence": []
+  },
+  {
+    "id": "unanswerable-2",
+    "pair_id": "unanswerable",
+    "language": "zh",
+    "question": "实验使用了哪款 GPU？",
+    "answerable": false,
+    "evidence": []
+  },
+  {
+    "id": "unanswerable-3",
+    "pair_id": "unanswerable",
+    "language": "zh",
+    "question": "作者的联系邮箱是什么？",
+    "answerable": false,
+    "evidence": []
+  }
+]

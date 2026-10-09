@@ -1,0 +1,38 @@
+{
+  "chunk_id": "13eafe96e468812c",
+  "document_id": "2a4952960f350e50",
+  "page": 4,
+  "section": "Abstract",
+  "kind": "table",
+  "row": 2,
+  "column": 2,
+  "row_label": "CLIP",
+  "column_label": "ImageNet",
+  "value": "76.2",
+  "quote": "76.2",
+  "quote_verified": true,
+  "cell_bound": true,
+  "boxes": [
+    [
+      328.177,
+      110.91532159999997,
+      349.7659542,
+      120.87792160000004
+    ],
+    [
+      447.050546,
+      82.00332159999994,
+      486.3330778,
+      91.9659216
+    ],
+    [
+      457.9691176,
+      110.84558340000001,
+      475.4136302,
+      120.80818339999996
+    ]
+  ],
+  "row_context": [],
+  "table_caption": "Table 1. Comparing CLIP to prior zero-shot transfer image classi-\nfication work. CLIP improves performance on all three datasets by\na large amount. This improvement reflects many differences since\nthe development of Visual N-Grams (Li et al., 2017).",
+  "interpretation": "first row treated as header, first column as row label"
+}
