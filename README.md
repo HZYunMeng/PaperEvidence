@@ -38,6 +38,12 @@ python -m paper_evidence ask "What accuracy did the proposed method achieve?" --
 
 The local adapter uses `/api/chat`, JSON output, temperature 0 and seed 42. Generated claims must cite retrieved chunk IDs and verbatim quotes. Unknown IDs, fabricated quotations, malformed outputs and numeric tokens absent from quoted evidence are rejected. **Quote existence and number presence do not prove semantic entailment or answer correctness.** Calculations and normalized representations such as `91.2 percent` versus `91.2%` can be rejected; support needs explicit evaluation before loosening these rules.
 
+## Browse without a question
+
+Open **逐页浏览论文（无需提问）**, enable the browser, and select a PDF page. Compare the full original page with all parsed fragments, text fragments or recognized tables. Inspect a cell or export a source fragment and its block coordinates even when retrieval misses it. Pages without indexable text remain viewable; OCR is still unavailable. The table filter counts recognized structures, not every table in the PDF.
+
+Downloaded examples are discovered from corpus manifests and shown only after PDF hash verification. The app never downloads papers during startup. Source excerpts and retrieval results share the same cell inspector, and value columns without usable geometry are excluded.
+
 ## Inspect a table cell
 
 Select a table source, enable **定位表格单元格**, and choose its data row and value column. The app displays a source-derived value such as `Proposed · Accuracy: 91.2%`, highlights the row label, column header and value cell, and exports their coordinates.
@@ -111,6 +117,19 @@ Three PMLR papers, 12 source facts paired across English and Chinese (24 answera
 
 These papers were used during parser development; this is not a held-out benchmark, and annotations need independent human review. [Report and failure cases](docs/REAL-EVAL.zh-CN.md), [annotations](eval/real/qa.json), [sources](eval/real/papers.json) and [raw results](eval/real/results.json) are provided. Initial diagnostics, the v0.3 run and the current run are retained. After fetching the PDFs, they are also available under the sidebar sample selector. No generated-answer accuracy or hallucination metric is reported.
 
+### Frozen-code NLP expansion
+
+```bash
+python scripts/fetch_real_papers.py --dataset eval/nlp
+python eval/real_eval.py --dataset eval/nlp --retrievers bm25 --out eval/nlp/bm25-results.json
+# With the prepared local E5 weights:
+python eval/real_eval.py --dataset eval/nlp
+```
+
+Two additional official PDFs ([BERT](https://aclanthology.org/N19-1423/) and [Attention Is All You Need](https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html)) were inspected after freezing the existing core code. Eight facts paired across languages yield 16 answerable queries: evidence recall@3 is **9/16 BM25, 6/16 dense and 9/16 hybrid**. All target short quotes and regions exist in the index, but **none of the four table facts have reliable cell bindings**. BERT's wide table loses row context when split as text; the Transformer's grouped, repeated column headers remain unsupported. Quote recall must not be mistaken for correct row/column interpretation.
+
+This is a small agent-annotated expansion without independent human review or code tuning on these questions in this run. It is not a representative benchmark. The selected dataset's `protocol.json` enforces core code hashes; changed code requires a new labeled protocol while retaining the original result. See [protocol, failures and reproduction](docs/NLP-EVAL.zh-CN.md) and [raw results](eval/nlp/results.json). No generation calls were made.
+
 ## Architecture
 
 ```mermaid
@@ -129,9 +148,9 @@ flowchart LR
 ## Limitations
 
 - Geometric heuristics can still mix complex column layouts, miss entirely borderless or multiheader tables and lose mathematical structure. See the [parser contract](docs/PARSER.zh-CN.md). Scanned pages and figures are explicitly reported as unindexed. Section detection is a rule based heuristic.
-- BM25 is lexical; multilingual embeddings support cross-language candidate retrieval but remain unvalidated on held-out real-paper questions. Neither similarity nor fused rank proves that a candidate answers the question.
+- BM25 is lexical; multilingual embeddings support cross-language candidate retrieval but still need broader independently reviewed real-paper validation. Neither similarity nor fused rank proves that a candidate answers the question.
 - The current index is a portable JSON file. Uploads in the UI are held in process memory and Streamlit's data cache; restart the app to clear them. This is a local prototype, not a multi-user hosted service.
-- No weights, keys or downloaded real-paper PDFs are bundled in the source archive. Semantic inference runs locally after explicit preparation; optional generation requires a local model or a configured cloud service. Held-out retrieval and generated-answer benchmarks remain outstanding.
+- No weights, keys or downloaded real-paper PDFs are bundled in the source archive. Semantic inference runs locally after explicit preparation; optional generation requires a local model or a configured cloud service. Broader independently reviewed retrieval and generated-answer benchmarks remain outstanding.
 - Source boxes cover blocks or explicitly selected table cells, not arbitrary exact quoted words. Numeric checks on plain text cannot detect swapping which method a number belongs to; the table adapter exposes its source labels but does not verify semantic relevance to the question.
 
 ## Related work

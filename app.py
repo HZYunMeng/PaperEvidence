@@ -1,19 +1,18 @@
 """Run with: streamlit run app.py"""
 from pathlib import Path
 import json
-import re
 
 import streamlit as st
-import pandas as pd
 
 from paper_evidence.answering import OllamaGenerator, answer_question
 from paper_evidence.chunking import chunk_blocks
-from paper_evidence.parsing import highlight_page, parse_pdf
+from paper_evidence.parsing import parse_pdf
 from paper_evidence.retrieval import BM25
 from paper_evidence.config import load_settings
 from paper_evidence.cloud import CompatibleGenerator
 from paper_evidence.semantic import E5Embedder, default_model_path, make_retriever
-from paper_evidence.tables import cell_reference, table_value_claim
+from paper_evidence.corpus import local_examples, verified_pdf
+from paper_evidence.viewer import inspect_source, show_page, show_text, source_label
 from paper_evidence import __version__
 
 try:
@@ -28,28 +27,14 @@ st.title("PaperEvidence · 论文证据助手")
 st.caption("上传论文，检索原文，逐条查看引用与页码。当前为早期工程原型。")
 
 
-def show_text(text):
-    if text.startswith("| ") and "| ---" in text:
-        table_lines = [line for line in text.splitlines() if line.startswith("| ")]
-        caption = "\n".join(line for line in text.splitlines() if not line.startswith("| "))
-        rows = [[cell.strip().replace("\\|", "|") for cell in re.split(r"(?<!\\)\|", line)[1:-1]]
-                for line in table_lines]
-        if len(rows) >= 3 and all(len(row) == len(rows[0]) for row in rows):
-            labels = [f"{label} (第 {i+1} 列)" if rows[0].count(label)>1 else label for i,label in enumerate(rows[0])]
-            st.table(pd.DataFrame(rows[2:], columns=labels))
-            if caption:
-                st.caption(caption)
-            return
-    st.text(text)
 with st.sidebar:
     st.header("论文与模式")
     use_sample = st.checkbox("使用内置示例 PDF", value=True)
-    examples = {"虚构演示论文":Path(__file__).parent / "examples/demo-paper.pdf"}
-    real_examples = {"SimCLR · 真实论文":"simclr", "CLIP · 真实论文":"clip", "EfficientNet · 真实论文":"efficientnet"}
-    for label, stem in real_examples.items():
-        path = Path(__file__).parent / "data/real-papers" / f"{stem}.pdf"
-        if path.exists():
-            examples[label] = path
+    examples = {"虚构演示论文":(Path(__file__).parent / "examples/demo-paper.pdf",None)}
+    downloaded, integrity_errors = local_examples(Path(__file__).parent)
+    examples.update(downloaded)
+    for error in integrity_errors:
+        st.warning(f"示例校验失败，已排除：{error}")
     example_name = st.selectbox("示例论文",list(examples),disabled=not use_sample)
     upload = st.file_uploader("上传文本型 PDF", type=["pdf"], disabled=use_sample, max_upload_size=30)
     retrieval_mode = st.selectbox("检索方式", ["BM25 关键词", "多语言语义", "关键词与语义融合"])
@@ -68,7 +53,7 @@ with st.sidebar:
 
 
 @st.cache_data(show_spinner=False, max_entries=4)
-def ingest(data, name, parser_revision="0.4.0"):
+def ingest(data, name, parser_revision="0.4.1"):
     paper = parse_pdf(data, name)
     return paper, chunk_blocks(paper.blocks)
 
@@ -89,15 +74,13 @@ def retriever_for(chunks):
 
 source = None
 if use_sample:
-    sample = examples[example_name]
+    sample, item = examples[example_name]
     if sample.exists():
-        source, name = sample.read_bytes(), sample.name
+        source, name = (verified_pdf(sample,item["sha256"]) if item else sample.read_bytes()), sample.name
         if example_name == "虚构演示论文":
             st.warning("示例 PDF 是本项目编写的虚构论文，只用于演示解析和检索；其中数值不是科研实验结果。")
         else:
-            manifest = json.loads((Path(__file__).parent / "eval/real/papers.json").read_text())
-            item = next(p for p in manifest if p["id"]==sample.stem)
-            st.caption(f"真实论文：{item['title']} · 原作者与出处见 [PMLR]({item['page_url']})")
+            st.caption(f"真实论文：{item['title']} · 原作者与出处见 [{item['publication']}]({item['page_url']})")
     else:
         st.error("内置示例缺失，请上传 PDF。")
 elif upload:
@@ -112,9 +95,6 @@ try:
 except Exception as exc:
     st.error(f"PDF 解析失败：{exc}")
     st.stop()
-if not chunks:
-    st.error("没有可检索文本。扫描件需要 OCR，当前版本未实现 OCR。")
-    st.stop()
 st.caption(f"{paper.name} · {paper.pages} 页 · {len(chunks)} 个片段")
 with st.expander("查看当前解析能力与限制"):
     for warning in paper.warnings:
@@ -128,6 +108,30 @@ request_options = (retrieval_mode, mode, model, top_k, settings.base_url, settin
 if st.session_state.get("request_options") != request_options:
     st.session_state.pop("result", None)
     st.session_state["request_options"] = request_options
+with st.expander("逐页浏览论文（无需提问）"):
+    if st.checkbox("打开逐页浏览",key=f"browse-{paper.id}"):
+        st.caption("查看已解析片段与完整 PDF。文字可提取不代表表格行列解析正确；未识别的表格、扫描页和图形请在原文核对。")
+        page = st.selectbox("PDF 页码",range(1,paper.pages+1),key=f"page-{paper.id}")
+        kind = st.radio("内容筛选",["全部片段","表格片段","正文片段"],horizontal=True,key=f"kind-{paper.id}")
+        candidates = [c for c in chunks if c.page==page and
+                      (kind=="全部片段" or (c.table is not None if kind=="表格片段" else c.table is None))]
+        st.caption(f"本页筛选后有 {len(candidates)} 个片段。表格片段只含已识别结构，数量不代表原文中的实际表格数。")
+        selected = st.selectbox("浏览片段",[None]+[c.id for c in candidates],
+            format_func=lambda cid:"整页 PDF 原文" if cid is None else source_label(next(c for c in candidates if c.id==cid)),
+            key=f"browse-source-{paper.id}-{page}-{kind}")
+        if selected is None:
+            try:
+                show_page(source,page)
+            except Exception as exc:
+                st.warning(f"PDF 页面预览不可用：{exc}")
+        else:
+            chunk = next(c for c in candidates if c.id==selected)
+            show_text(chunk.text)
+            inspect_source(source,chunk,key_prefix="browse")
+        st.download_button("下载当前 PDF",source,file_name=name,mime="application/pdf",key=f"pdf-download-{paper.id}")
+if not chunks:
+    st.warning("没有可检索文本。仍可逐页查看 PDF；扫描件需要 OCR，当前版本未实现 OCR。")
+    st.stop()
 question = st.text_input("向论文提问", value="What accuracy did the proposed method achieve?")
 if st.button("检索并查看证据", type="primary"):
     st.session_state.pop("result", None)
@@ -177,42 +181,7 @@ with right:
         bound = next((e for claim in result["claims"] for e in claim["evidence"] if e.get("cell_bound")),None)
         selected = st.selectbox("选择证据片段", ids,
             index=ids.index(bound["chunk_id"]) if bound else 0,
-            format_func=lambda cid: f"第 {lookup[cid].page} 页 · {lookup[cid].section} · {lookup[cid].kind}")
+            format_func=lambda cid: source_label(lookup[cid]))
         chunk = lookup[selected]
-        boxes = None
         binding = bound if bound and bound["chunk_id"] == selected else None
-        if chunk.table and st.checkbox("定位表格单元格",value=bool(binding),key=f"inspect-{selected}"):
-            st.caption("第 1 行作为表头，第 1 列作为行名。复杂或合并表头需人工核对。")
-            choices = []
-            for r in range(1,len(chunk.table.rows)):
-                for c in range(1,len(chunk.table.rows[r])):
-                    try:
-                        cell_reference(chunk,r,c)
-                        choices.append(r)
-                        break
-                    except ValueError:
-                        pass
-            if choices:
-                row = st.selectbox("数据行",choices,
-                    index=choices.index(binding["row"]) if binding and binding["row"] in choices else 0,
-                    format_func=lambda r:f"第 {r+1} 行 · {' / '.join(c.text for c in chunk.table.rows[r][:2])}",key=f"row-{selected}")
-                column = st.selectbox("数值列",range(1,len(chunk.table.rows[0])),
-                    index=binding["column"]-1 if binding else 0,
-                    format_func=lambda c:f"第 {c+1} 列 · {chunk.table.rows[0][c].text}",key=f"column-{selected}")
-                try:
-                    reference = cell_reference(chunk,row,column)
-                    st.success(table_value_claim(chunk,row,column)["text"])
-                    boxes = reference["boxes"]
-                    st.download_button("导出单元格引用",json.dumps(reference,ensure_ascii=False,indent=2),
-                        file_name="table-cell-citation.json",mime="application/json")
-                except ValueError as exc:
-                    st.warning(str(exc))
-            else:
-                st.warning("当前表格没有可可靠绑定的单元格，请核对 PDF 原文。")
-        st.caption("黄色框标记选中单元格、行名、表头及必要的同名行上下文；未选择单元格时标记整个片段。")
-        try:
-            st.image(highlight_page(source, chunk,selected_boxes=boxes), caption=f"第 {chunk.page} 页", width="stretch")
-        except Exception as exc:
-            st.warning(f"PDF 页面预览不可用：{exc}")
-        with st.expander("完整检索片段"):
-            st.text(chunk.text)
+        inspect_source(source,chunk,binding=binding)

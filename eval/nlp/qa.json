@@ -1,0 +1,428 @@
+[
+  {
+    "id": "bert-base-params-en",
+    "paper_id": "bert",
+    "pair_id": "bert-base-params",
+    "language": "en",
+    "question": "How many total parameters does BERT BASE have?",
+    "reference_answer": "110M",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 3,
+        "quote": "110M",
+        "bbox": [
+          333.525,
+          594.009,
+          360.587,
+          605.918
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "bert-base-params-zh",
+    "paper_id": "bert",
+    "pair_id": "bert-base-params",
+    "language": "zh",
+    "question": "BERT BASE 的总参数量是多少？",
+    "reference_answer": "110M",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 3,
+        "quote": "110M",
+        "bbox": [
+          333.525,
+          594.009,
+          360.587,
+          605.918
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "bert-mask-rate-en",
+    "paper_id": "bert",
+    "pair_id": "bert-mask-rate",
+    "language": "en",
+    "question": "What percentage of WordPiece tokens does BERT mask in each sequence?",
+    "reference_answer": "15%",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 4,
+        "quote": "15%",
+        "bbox": [
+          410.107,
+          186.657,
+          431.103,
+          198.566
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "bert-mask-rate-zh",
+    "paper_id": "bert",
+    "pair_id": "bert-mask-rate",
+    "language": "zh",
+    "question": "BERT 在每个序列中随机遮蔽多少比例的 WordPiece token？",
+    "reference_answer": "15%",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 4,
+        "quote": "15%",
+        "bbox": [
+          410.107,
+          186.657,
+          431.103,
+          198.566
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "bert-base-mrpc-en",
+    "paper_id": "bert",
+    "pair_id": "bert-base-mrpc",
+    "language": "en",
+    "question": "In Table 1, what MRPC F1 score does BERT BASE achieve?",
+    "reference_answer": "88.9",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 6,
+        "quote": "88.9",
+        "bbox": [
+          423.981,
+          128.145,
+          440.673,
+          138.112
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "BERTBASE",
+          "column_label": "MRPC"
+        }
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "bert-base-mrpc-zh",
+    "paper_id": "bert",
+    "pair_id": "bert-base-mrpc",
+    "language": "zh",
+    "question": "表 1 中 BERT BASE 的 MRPC F1 分数是多少？",
+    "reference_answer": "88.9",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 6,
+        "quote": "88.9",
+        "bbox": [
+          423.981,
+          128.145,
+          440.673,
+          138.112
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "BERTBASE",
+          "column_label": "MRPC"
+        }
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "bert-large-rte-en",
+    "paper_id": "bert",
+    "pair_id": "bert-large-rte",
+    "language": "en",
+    "question": "In Table 1, what RTE accuracy does BERT LARGE achieve?",
+    "reference_answer": "70.1",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 6,
+        "quote": "70.1",
+        "bbox": [
+          459.739,
+          140.038,
+          476.431,
+          150.004
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "BERTLARGE",
+          "column_label": "RTE"
+        }
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "bert-large-rte-zh",
+    "paper_id": "bert",
+    "pair_id": "bert-large-rte",
+    "language": "zh",
+    "question": "表 1 中 BERT LARGE 的 RTE 准确率是多少？",
+    "reference_answer": "70.1",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 6,
+        "quote": "70.1",
+        "bbox": [
+          459.739,
+          140.038,
+          476.431,
+          150.004
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "BERTLARGE",
+          "column_label": "RTE"
+        }
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "transformer-encoder-layers-en",
+    "paper_id": "transformer",
+    "pair_id": "transformer-encoder-layers",
+    "language": "en",
+    "question": "How many identical layers are in the Transformer encoder stack?",
+    "reference_answer": "6",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 2,
+        "quote": "6",
+        "bbox": [
+          345.959,
+          700.561,
+          351.941,
+          711.524
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "transformer-encoder-layers-zh",
+    "paper_id": "transformer",
+    "pair_id": "transformer-encoder-layers",
+    "language": "zh",
+    "question": "Transformer 编码器由多少个相同层组成？",
+    "reference_answer": "6",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 2,
+        "quote": "6",
+        "bbox": [
+          345.959,
+          700.561,
+          351.941,
+          711.524
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "transformer-optimizer-en",
+    "paper_id": "transformer",
+    "pair_id": "transformer-optimizer",
+    "language": "en",
+    "question": "Which optimizer is used to train the Transformer?",
+    "reference_answer": "Adam",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 7,
+        "quote": "Adam",
+        "bbox": [
+          158.654,
+          526.032,
+          184.392,
+          536.995
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "transformer-optimizer-zh",
+    "paper_id": "transformer",
+    "pair_id": "transformer-optimizer",
+    "language": "zh",
+    "question": "Transformer 训练使用哪种优化器？",
+    "reference_answer": "Adam",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 7,
+        "quote": "Adam",
+        "bbox": [
+          158.654,
+          526.032,
+          184.392,
+          536.995
+        ],
+        "kind": "text"
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "transformer-base-ende-en",
+    "paper_id": "transformer",
+    "pair_id": "transformer-base-ende",
+    "language": "en",
+    "question": "In Table 2, what EN-DE BLEU does the Transformer base model achieve?",
+    "reference_answer": "27.3",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 8,
+        "quote": "27.3",
+        "bbox": [
+          294.437,
+          218.117,
+          312.871,
+          229.08
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "Transformer (base model)",
+          "column_label": "EN-DE",
+          "column_group": "BLEU"
+        }
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "transformer-base-ende-zh",
+    "paper_id": "transformer",
+    "pair_id": "transformer-base-ende",
+    "language": "zh",
+    "question": "表 2 中 Transformer base model 的英德翻译 BLEU 是多少？",
+    "reference_answer": "27.3",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 8,
+        "quote": "27.3",
+        "bbox": [
+          294.437,
+          218.117,
+          312.871,
+          229.08
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "Transformer (base model)",
+          "column_label": "EN-DE",
+          "column_group": "BLEU"
+        }
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "transformer-big-enfr-en",
+    "paper_id": "transformer",
+    "pair_id": "transformer-big-enfr",
+    "language": "en",
+    "question": "In Table 2, what EN-FR BLEU does Transformer big achieve?",
+    "reference_answer": "41.0",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 8,
+        "quote": "41.0",
+        "bbox": [
+          335.726,
+          229.43,
+          354.161,
+          240.392
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "Transformer (big)",
+          "column_label": "EN-FR",
+          "column_group": "BLEU"
+        }
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "transformer-big-enfr-zh",
+    "paper_id": "transformer",
+    "pair_id": "transformer-big-enfr",
+    "language": "zh",
+    "question": "表 2 中 Transformer big 的英法翻译 BLEU 是多少？",
+    "reference_answer": "41.0",
+    "answerable": true,
+    "evidence": [
+      {
+        "page": 8,
+        "quote": "41.0",
+        "bbox": [
+          335.726,
+          229.43,
+          354.161,
+          240.392
+        ],
+        "kind": "table",
+        "table": {
+          "row_label": "Transformer (big)",
+          "column_label": "EN-FR",
+          "column_group": "BLEU"
+        }
+      }
+    ],
+    "review": "Agent-read full relevant PDF page and rendered image; source glyph region checked. Not independently human-reviewed."
+  },
+  {
+    "id": "bert-unanswerable",
+    "paper_id": "bert",
+    "pair_id": "bert-unanswerable",
+    "language": "en",
+    "question": "Which AES key length is used to encrypt the training data?",
+    "reference_answer": null,
+    "answerable": false,
+    "evidence": [],
+    "review": "Negative probe draft, absent from inspected training sections; independent review still needed."
+  },
+  {
+    "id": "transformer-unanswerable",
+    "paper_id": "transformer",
+    "pair_id": "transformer-unanswerable",
+    "language": "en",
+    "question": "Which AES key length is used to encrypt the training data?",
+    "reference_answer": null,
+    "answerable": false,
+    "evidence": [],
+    "review": "Negative probe draft, absent from inspected training sections; independent review still needed."
+  }
+]
