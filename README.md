@@ -60,6 +60,12 @@ Same-row fields are shown to help distinguish repeated method names, including n
 
 [Workflow and verification](docs/TABLE-CATALOG.zh-CN.md).
 
+## Collect source evidence
+
+After inspecting a cell, click **加入证据清单**. The session collection keeps selected source values across paper switches, deduplicates physical cells, and exports JSON or Markdown with PDF hashes, page numbers, header paths, coordinates and raw same-row fields. Reopen the original PDF to preview saved regions; a matching filename is insufficient, and the full SHA256 must match.
+
+The collection is temporary session memory. Export before refreshing or restarting. Exported records do not include PDFs, and importing a collection is not implemented. Records from different experiments are not automatically comparable; the app does not rank methods or calculate improvements. [Usage and validation](docs/EVIDENCE-COLLECTION.zh-CN.md).
+
 ## Inspect a table cell
 
 Select a table source, enable **定位表格单元格**, and choose its data row and value column. The app displays a source-derived value such as `Proposed · Accuracy: 91.2%`, highlights the row label, column header and value cell, and exports their coordinates.

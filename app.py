@@ -16,6 +16,7 @@ from paper_evidence.demo import PRESETS
 from paper_evidence.tables import find_cells, label_key
 from paper_evidence.catalog import match_label
 from paper_evidence.catalog_view import choose_catalog_cell, show_row_source
+from paper_evidence.collection_view import show_collection
 from paper_evidence.viewer import inspect_source, show_page, show_text, source_label
 from paper_evidence import __version__
 
@@ -59,7 +60,7 @@ with st.sidebar:
 
 
 @st.cache_data(show_spinner=False, max_entries=4)
-def ingest(data, name, parser_revision="0.5.1"):
+def ingest(data, name, parser_revision="0.6.0"):
     paper = parse_pdf(data, name)
     return paper, chunk_blocks(paper.blocks)
 
@@ -107,20 +108,25 @@ if use_sample:
                     st.error("下载或校验未成功。可以重试、上传自己的 PDF，或在侧栏选择虚构演示论文。")
         else:
             st.error("演示文件缺失，请上传 PDF。")
+        show_collection(None,None)
         st.stop()
 elif upload:
     source, name = upload.getvalue(), upload.name
 
 if source is None:
     st.info("从侧栏选择示例或上传论文。")
+    show_collection(None,None)
     st.stop()
 try:
     with st.spinner("解析论文并保留页码与坐标…"):
         paper, chunks = ingest(source, name, __version__)
 except Exception as exc:
     st.error(f"PDF 解析失败：{exc}")
+    show_collection(None,None)
     st.stop()
 st.caption(f"{paper.name} · {paper.pages} 页 · {len(chunks)} 个片段")
+document = {'name':paper.name,'title':item['title'] if item else ''}
+show_collection(source,paper)
 with st.expander("查看当前解析能力与限制"):
     for warning in paper.warnings:
         st.write(warning)
@@ -189,7 +195,7 @@ if cell_result:
                 st.json(selected_ref['row_context'])
             show_row_source(selected_chunk,selected_ref['row'],key_prefix='lookup')
         with pdf_panel:
-            inspect_source(source,selected_chunk,binding=selected_ref,key_prefix="lookup",locked=True)
+            inspect_source(source,selected_chunk,binding=selected_ref,key_prefix="lookup",locked=True,document=document)
 with st.expander("逐页浏览论文（无需提问）"):
     if st.checkbox("打开逐页浏览",key=f"browse-{paper.id}"):
         st.caption("查看已解析片段与完整 PDF。文字可提取不代表表格行列解析正确；未识别的表格、扫描页和图形请在原文核对。")
@@ -209,7 +215,7 @@ with st.expander("逐页浏览论文（无需提问）"):
         else:
             chunk = next(c for c in candidates if c.id==selected)
             show_text(chunk.text)
-            inspect_source(source,chunk,key_prefix="browse")
+            inspect_source(source,chunk,key_prefix="browse",document=document)
         st.download_button("下载当前 PDF",source,file_name=name,mime="application/pdf",key=f"pdf-download-{paper.id}")
 if not chunks:
     st.warning("没有可检索文本。仍可逐页查看 PDF；扫描件需要 OCR，当前版本未实现 OCR。")
@@ -266,4 +272,4 @@ with right:
             format_func=lambda cid: source_label(lookup[cid]))
         chunk = lookup[selected]
         binding = bound if bound and bound["chunk_id"] == selected else None
-        inspect_source(source,chunk,binding=binding)
+        inspect_source(source,chunk,binding=binding,document=document)

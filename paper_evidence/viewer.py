@@ -9,6 +9,7 @@ import streamlit as st
 from .parsing import highlight_page
 from .tables import cell_reference, table_value_claim
 from .catalog import row_source, row_label
+from .collection_view import collect_cell
 
 
 def show_text(text):
@@ -56,7 +57,7 @@ def show_page(source, page):
     st.image(preview,caption=f"PDF 第 {page} 页 · 完整原文",width="stretch")
 
 
-def inspect_source(source, chunk, *, binding=None, key_prefix="search", locked=False):
+def inspect_source(source, chunk, *, binding=None, key_prefix="search", locked=False, document=None):
     key = f"{key_prefix}-{chunk.document_id}-{chunk.id}"
     if binding:
         key += f"-{binding['row']}-{binding['column']}"
@@ -77,6 +78,7 @@ def inspect_source(source, chunk, *, binding=None, key_prefix="search", locked=F
             boxes = reference["boxes"]
             st.download_button("导出单元格引用",json.dumps(reference,ensure_ascii=False,indent=2),
                 file_name="table-cell-citation.json",mime="application/json",key=f"cell-export-{key}")
+            collect_cell(source,chunk,row,column,document=document,key=key)
         else:
             st.warning("当前表格没有可可靠绑定的单元格，请核对 PDF 原文。")
     st.caption("黄色框标记选中单元格、行名、表头及必要的同名行上下文；未选择单元格时标记整个片段。")
