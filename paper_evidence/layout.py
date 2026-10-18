@@ -101,7 +101,7 @@ def _caption(page, box, margin=0):
     return min(candidates, default=(0,''))[1]
 
 
-def horizontal_tables(page, occupied=()):
+def _legacy_horizontal_tables(page, occupied=()):
     """Recover single-header numeric tables bounded by >=3 horizontal rules.
 
     Column gutters must be empty across all numeric data rows. Text is assigned
@@ -156,6 +156,18 @@ def horizontal_tables(page, occupied=()):
         if valid:
             result.append((box, TableData(tuple(rows), 'horizontal-rules-word-gutters', caption)))
     return result
+
+
+def horizontal_tables(page, occupied=()):
+    from .header_tables import ruled_table
+    result = []
+    for box in _ruled_regions(page):
+        if any(_overlap(box,old)>0.5 for old in occupied):
+            continue
+        structure = ruled_table(page,box)
+        if structure is not None:
+            result.append((box,structure))
+    return result + _legacy_horizontal_tables(page,tuple(occupied)+tuple(b for b,_ in result))
 
 
 def _overlap(a,b):

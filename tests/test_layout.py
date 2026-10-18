@@ -80,7 +80,7 @@ class LayoutTests(unittest.TestCase):
     def test_horizontal_table_cells_keep_source_words_and_geometry(self):
         paper=parse_pdf(pdf_bytes(horizontal))
         table=next(c for c in chunk_blocks(paper.blocks) if c.table)
-        self.assertEqual(table.table.extraction,'horizontal-rules-word-gutters')
+        self.assertIn(table.table.extraction,('horizontal-rules-word-gutters','horizontal-rules-header-bands'))
         self.assertIn('Table 9.',table.table.caption)
         ref=cell_reference(table,2,1)
         self.assertEqual((ref['row_label'],ref['column_label'],ref['value']),('Beta decoder','Score','28.6'))

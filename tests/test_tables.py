@@ -91,7 +91,7 @@ class TableTests(unittest.TestCase):
             path=Path(directory)/"index.json"
             save_index(self.paper,self.chunks,path)
             data=json.loads(path.read_text())
-            self.assertEqual(data["schema_version"],2)
+            self.assertEqual(data["schema_version"],3)
             data["schema_version"]=1
             for c in data["chunks"]:
                 c.pop("table")

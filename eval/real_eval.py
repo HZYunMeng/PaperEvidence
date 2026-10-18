@@ -87,10 +87,6 @@ def has_bound_cell(chunk, expected):
     if not chunk.table or chunk.page != expected["page"]:
         return False
     wanted = expected["table"]
-    # The current source-cell adapter has no hierarchical header geometry.
-    # Repeated EN-DE/EN-FR labels must not satisfy a BLEU-group annotation.
-    if "column_group" in wanted:
-        return False
     for row in range(1,len(chunk.table.rows)):
         for column in range(1,len(chunk.table.rows[row])):
             try:
@@ -99,7 +95,9 @@ def has_bound_cell(chunk, expected):
                 continue
             if (compact(reference["value"]) == compact(expected["quote"])
                     and compact(reference["row_label"]) == compact(wanted["row_label"])
-                    and compact(reference["column_label"]) == compact(wanted["column_label"])
+                    and compact(reference.get("column_leaf_label",reference["column_label"])) == compact(wanted["column_label"])
+                    and ("column_group" not in wanted or compact(wanted["column_group"]) in
+                         [compact(g) for g in reference.get("column_groups",[])])
                     and ("row_context" not in wanted or compact(wanted["row_context"]) in
                          compact(" ".join(c.text for c in chunk.table.rows[row])))
                     and region_contains(reference["boxes"][2],expected["bbox"])):
@@ -132,17 +130,20 @@ def main():
     parser.add_argument("--k",type=int,default=3)
     parser.add_argument("--dataset",type=Path,default=ROOT / "eval/real")
     parser.add_argument("--data-dir",type=Path,default=ROOT / "data/real-papers")
+    parser.add_argument("--protocol",type=Path,help="Explicit alternate protocol; retain frozen results when tuning")
     parser.add_argument("--out",type=Path)
     parser.add_argument("--retrievers",nargs="+",choices=["bm25","dense","hybrid"],default=["bm25","dense","hybrid"])
     args = parser.parse_args()
     if not 1 <= args.k <= 20:
         parser.error("k must be between 1 and 20")
+    if args.protocol and (not args.out or args.out.resolve()==(args.dataset/'results.json').resolve()):
+        parser.error("An alternate protocol requires a separate --out file; preserve the original results.json")
     manifest = args.dataset / "papers.json"
     qa_path = args.dataset / "qa.json"
     papers = load_manifest(manifest)
     cases = json.loads(qa_path.read_text())
     validate_cases(cases,papers)
-    protocol_path = args.dataset / "protocol.json"
+    protocol_path = args.protocol or args.dataset / "protocol.json"
     protocol = json.loads(protocol_path.read_text()) if protocol_path.exists() else {}
     check_checkpoint(protocol)
     embedder = E5Embedder() if set(args.retrievers)-{"bm25"} else None
@@ -208,11 +209,11 @@ def main():
               "counts":{"papers":len(papers),"queries":len(cases),
                         "answerable_facts":len({c.get("pair_id",c["id"]) for c in cases if c["answerable"]})},
               "metrics":{"evidence_recall":"annotated quote plus source-region center present in a top-k chunk",
-                         "bound_cell_recall":"correct parsed row label, header, value and source cell region in a top-k chunk; hierarchical column groups currently unsupported and count as unavailable"},
+                         "bound_cell_recall":"correct parsed row label, leaf header, required parent group, value and source cell region in a top-k chunk"},
               "k":args.k,"annotation_sha256":hashlib.sha256(qa_path.read_bytes()).hexdigest(),
               "manifest_sha256":hashlib.sha256(manifest.read_bytes()).hexdigest(),
               "code_sha256":{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in
-                             ("paper_evidence/parsing.py","paper_evidence/layout.py","paper_evidence/models.py","paper_evidence/chunking.py","paper_evidence/retrieval.py","paper_evidence/semantic.py","paper_evidence/tables.py","paper_evidence/answering.py","paper_evidence/corpus.py","eval/real_eval.py")},
+                             ("paper_evidence/parsing.py","paper_evidence/layout.py","paper_evidence/header_tables.py","paper_evidence/models.py","paper_evidence/chunking.py","paper_evidence/retrieval.py","paper_evidence/semantic.py","paper_evidence/tables.py","paper_evidence/answering.py","paper_evidence/corpus.py","eval/real_eval.py")},
               "python":platform.python_version(),"architecture":platform.machine(),
               "model":embedder.metadata if embedder else None,"documents":documents,
               "retrievers":{name:{"summary":summarize(entries),"rows":entries} for name,entries in rows.items()},

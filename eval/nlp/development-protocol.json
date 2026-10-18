@@ -1,0 +1,5 @@
+{
+  "dataset": "NLP development corpus after header-band table recovery; previously inspected annotations",
+  "protocol": "Same 16 paired questions and two negative probes, paper-specific index, 1400-character chunks and k=3. These cases were inspected during implementation and are now DEVELOPMENT data. No generation calls. Original frozen-code results remain in results.json.",
+  "limitations": "Small agent-authored annotations without independent human review. Eight independent facts, not sixteen independent samples. Parser changes were guided by these failures, so this is not a held-out result or a causal module ablation. Evidence recall does not measure semantic answer support or calibrated abstention."
+}

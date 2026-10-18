@@ -1,0 +1,2154 @@
+{
+  "dataset": "NLP development corpus after header-band table recovery; previously inspected annotations",
+  "run_date_utc": "2026-10-09",
+  "protocol": "Same 16 paired questions and two negative probes, paper-specific index, 1400-character chunks and k=3. These cases were inspected during implementation and are now DEVELOPMENT data. No generation calls. Original frozen-code results remain in results.json.",
+  "checkpoint_commit": null,
+  "checkpoint_verified": false,
+  "protocol_sha256": "c368838c56a49df0eebb5f12b8e64eee3e14fe51582c89479a711c6ed4e99597",
+  "counts": {
+    "papers": 2,
+    "queries": 18,
+    "answerable_facts": 8
+  },
+  "metrics": {
+    "evidence_recall": "annotated quote plus source-region center present in a top-k chunk",
+    "bound_cell_recall": "correct parsed row label, leaf header, required parent group, value and source cell region in a top-k chunk"
+  },
+  "k": 3,
+  "annotation_sha256": "b6125d53856060c0bafccd23470d0848d7cd261cbad3356b6a43c0d6b354eade",
+  "manifest_sha256": "188153be1e90cb9665bd29f6421dd58749b0c0636dc914fb3963d81cba89c1da",
+  "code_sha256": {
+    "paper_evidence/parsing.py": "c8fb8a1e38fef15f977a74217204a3172868c24a9740c4e7e04891c8a77ad80c",
+    "paper_evidence/layout.py": "08a18f080fca81ca47a4f597f64365277f3f121978ad654eefebab4efe55265e",
+    "paper_evidence/header_tables.py": "1d2b501e8f448f11d305fe700d2d9dc2a464f46a6c7b7801a288ddba4167b5f8",
+    "paper_evidence/models.py": "e7789a4555d5adcbea254565425f53a33c0953f07a27493c9979881c461a6d11",
+    "paper_evidence/chunking.py": "4c2867c76a7f334dddc5c95d8b86946b74bfdae732b517b375b2a9a32532fe0c",
+    "paper_evidence/retrieval.py": "122f792310af127dca9a3b68b225dd556474881d6c8c55a6b7b5cce570f0d575",
+    "paper_evidence/semantic.py": "001899322b242ae3ae58d923b61b0e8e96fa7023f3caf5aaf9785da13736d0c5",
+    "paper_evidence/tables.py": "23c02625d10f748a9613b957567903c03d73dc31107cbe027b0b6f9b111a3964",
+    "paper_evidence/answering.py": "d39eefd037441036426b865da8fcd539826e0fc58acf970a9c80b9a553a485f1",
+    "paper_evidence/corpus.py": "0cb2a00641fddf19ff1cfcc8b29cd06f5f55e057d638091d5c721431320e5758",
+    "eval/real_eval.py": "b66db3855ed12be78d3c49d8dbe947db4d7bfc234974c1ee0faaf72cbce5fd00"
+  },
+  "python": "3.12.14",
+  "architecture": "arm64",
+  "model": {
+    "model_id": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "max_tokens": 512,
+    "window_overlap": 64,
+    "device": "cpu",
+    "adapter": "e5-token-windows-v1"
+  },
+  "documents": [
+    {
+      "id": "bert",
+      "sha256": "987545ffb087f1ece898142c403a516baeabeb70ce19089397fac6f7db12c3d4",
+      "pages": 16,
+      "chunks": 112,
+      "table_chunks": 4,
+      "parse_seconds": 1.2190724999527447,
+      "embedding_seconds": 1.8806351670064032,
+      "warnings": [
+        "第 3 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 3 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 3 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 3 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 3 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 3 页含 14 个图片对象；图片内容尚未进入检索。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 5 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 13 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 13 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 13 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 15 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "第 15 页含 24 个图片对象；图片内容尚未进入检索。",
+        "第 16 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "阅读顺序和横线表格按坐标启发式恢复；分组表头需明确的分组横线。无边框表格、跨页表格、公式和复杂版式仍需原文核对。"
+      ]
+    },
+    {
+      "id": "transformer",
+      "sha256": "d87d482d5ae7960e2e43d7dd6d21377e60e73e8fce1bf2a01aff7aca8a08c537",
+      "pages": 11,
+      "chunks": 37,
+      "table_chunks": 2,
+      "parse_seconds": 0.5288716250215657,
+      "embedding_seconds": 0.7226408330025151,
+      "warnings": [
+        "第 3 页含 1 个图片对象；图片内容尚未进入检索。",
+        "第 4 页含 2 个图片对象；图片内容尚未进入检索。",
+        "第 9 页有稀疏或不完整网格，未作为表格索引；保留可提取文字。",
+        "阅读顺序和横线表格按坐标启发式恢复；分组表头需明确的分组横线。无边框表格、跨页表格、公式和复杂版式仍需原文核对。"
+      ]
+    }
+  ],
+  "retrievers": {
+    "bm25": {
+      "summary": {
+        "answerable_queries": 16,
+        "source_available_queries": 16,
+        "table_queries": 8,
+        "bound_cell_available_queries": 8,
+        "evidence_recall_at_k": 0.6875,
+        "bound_cell_recall_at_k": 0.75,
+        "by_language": {
+          "en": 1.0,
+          "zh": 0.375
+        },
+        "by_paper": {
+          "bert": 0.625,
+          "transformer": 0.75
+        }
+      },
+      "rows": [
+        {
+          "id": "bert-base-params-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "How many total parameters does BERT BASE have?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00012183398939669132,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "fb6352147d7a5c44",
+              "page": 3,
+              "kind": "text",
+              "score": 10.061925752980965,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "9fc6cccf1d276593",
+              "page": 8,
+              "kind": "text",
+              "score": 7.779101062301795,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "5721498ea79b8e69",
+              "page": 13,
+              "kind": "text",
+              "score": 6.143956052190554,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "bert-base-params-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "BERT BASE 的总参数量是多少？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0001303329481743276,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 4.648273447898962,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "010cb7bd1bc0c89f",
+              "page": 6,
+              "kind": "text",
+              "score": 4.555950982187131,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "272a69c49f868797",
+              "page": 8,
+              "kind": "text",
+              "score": 4.18967196800522,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "bert-mask-rate-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "What percentage of WordPiece tokens does BERT mask in each sequence?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00012279197108000517,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "7d50026550dba7a0",
+              "page": 4,
+              "kind": "text",
+              "score": 15.307083150136107,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "364d336d77ec85ed",
+              "page": 13,
+              "kind": "text",
+              "score": 11.971683313758744,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "8fcf0b42b8838a57",
+              "page": 4,
+              "kind": "text",
+              "score": 6.979806990241864,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "bert-mask-rate-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "BERT 在每个序列中随机遮蔽多少比例的 WordPiece token？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00023012497695162892,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "8fcf0b42b8838a57",
+              "page": 4,
+              "kind": "text",
+              "score": 6.1365308567418815,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "7d50026550dba7a0",
+              "page": 4,
+              "kind": "text",
+              "score": 4.945423643069241,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "22cd700e222a3d4f",
+              "page": 5,
+              "kind": "text",
+              "score": 3.9878132547416714,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "bert-base-mrpc-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "In Table 1, what MRPC F1 score does BERT BASE achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.00014958303654566407,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb976e10aa1416df",
+              "page": 7,
+              "kind": "text",
+              "score": 9.373600945448583,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "50f321b715d46ecb",
+              "page": 6,
+              "kind": "table",
+              "score": 9.315436192024725,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "272a69c49f868797",
+              "page": 8,
+              "kind": "text",
+              "score": 8.305081012357917,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "bert-base-mrpc-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "表 1 中 BERT BASE 的 MRPC F1 分数是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.0001633340143598616,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "194b94c761e82453",
+              "page": 6,
+              "kind": "text",
+              "score": 8.095711665320579,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "eb976e10aa1416df",
+              "page": 7,
+              "kind": "text",
+              "score": 7.6392745526131325,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "272a69c49f868797",
+              "page": 8,
+              "kind": "text",
+              "score": 7.175935640647619,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "bert-large-rte-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "In Table 1, what RTE accuracy does BERT LARGE achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.00016079097986221313,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "3bd3768021e5c056",
+              "page": 16,
+              "kind": "text",
+              "score": 9.815053564029665,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 8.315658410132457,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "50f321b715d46ecb",
+              "page": 6,
+              "kind": "table",
+              "score": 7.3272023642417095,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "bert-large-rte-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "表 1 中 BERT LARGE 的 RTE 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.00019933300791308284,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb976e10aa1416df",
+              "page": 7,
+              "kind": "text",
+              "score": 5.372498828383938,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 4.897711352632902,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "989b5ef62a346afc",
+              "page": 15,
+              "kind": "text",
+              "score": 4.720826778490322,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "bert-unanswerable",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00014595797983929515,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "5721498ea79b8e69",
+              "page": 13,
+              "kind": "text",
+              "score": 5.265128074367699,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "a11dce79bf01608c",
+              "page": 3,
+              "kind": "text",
+              "score": 5.146658936043107,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "f514925d407d3420",
+              "page": 3,
+              "kind": "text",
+              "score": 4.7702211930698715,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "transformer-encoder-layers-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "How many identical layers are in the Transformer encoder stack?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 7.016601739451289e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "7737556b6a9bdb52",
+              "page": 3,
+              "kind": "text",
+              "score": 10.006746189160287,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "f096e4ba4f5137b3",
+              "page": 2,
+              "kind": "text",
+              "score": 8.738917290041528,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "3378099b548a33b6",
+              "page": 6,
+              "kind": "text",
+              "score": 5.84496619712558,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "transformer-encoder-layers-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "Transformer 编码器由多少个相同层组成？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 6.029097130522132e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 1.5945560213631487,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "9f423268888f29e5",
+              "page": 2,
+              "kind": "text",
+              "score": 1.516703412792201,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 1.5132487720395496,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "transformer-optimizer-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "Which optimizer is used to train the Transformer?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 4.1000021155923605e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "b460abfe9ca3e629",
+              "page": 7,
+              "kind": "text",
+              "score": 5.403652529823487,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 5.138905398048111,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "582dab28a89ad7f8",
+              "page": 8,
+              "kind": "text",
+              "score": 5.103527111137078,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "transformer-optimizer-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "Transformer 训练使用哪种优化器？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 5.0875009037554264e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 1.5945560213631487,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "9f423268888f29e5",
+              "page": 2,
+              "kind": "text",
+              "score": 1.516703412792201,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 1.5132487720395496,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "transformer-base-ende-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "In Table 2, what EN-DE BLEU does the Transformer base model achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 6.320799002423882e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 19.089249768975307,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 9.105552886227311,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "582dab28a89ad7f8",
+              "page": 8,
+              "kind": "text",
+              "score": 7.888769868200396,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "transformer-base-ende-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "表 2 中 Transformer base model 的英德翻译 BLEU 是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 6.741599645465612e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 7.521187416728873,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 7.399885027226217,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "582dab28a89ad7f8",
+              "page": 8,
+              "kind": "text",
+              "score": 5.842462908695321,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "transformer-big-enfr-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "In Table 2, what EN-FR BLEU does Transformer big achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 6.145896622911096e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 18.787358366099333,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 9.784468797937274,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "9c74e9c7f2e70bd4",
+              "page": 8,
+              "kind": "text",
+              "score": 7.183354260532582,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "transformer-big-enfr-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "表 2 中 Transformer big 的英法翻译 BLEU 是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 6.608298281207681e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 8.200103328438836,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 7.0979936243502415,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "9c74e9c7f2e70bd4",
+              "page": 8,
+              "kind": "text",
+              "score": 5.1713741110003335,
+              "score_kind": "bm25"
+            }
+          ]
+        },
+        {
+          "id": "transformer-unanswerable",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 5.6500022765249014e-05,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "35792a34e0df8bdb",
+              "page": 7,
+              "kind": "text",
+              "score": 6.343832644687839,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 5.898763935102087,
+              "score_kind": "bm25"
+            },
+            {
+              "chunk_id": "582dab28a89ad7f8",
+              "page": 8,
+              "kind": "text",
+              "score": 5.640303409584598,
+              "score_kind": "bm25"
+            }
+          ]
+        }
+      ]
+    },
+    "dense": {
+      "summary": {
+        "answerable_queries": 16,
+        "source_available_queries": 16,
+        "table_queries": 8,
+        "bound_cell_available_queries": 8,
+        "evidence_recall_at_k": 0.375,
+        "bound_cell_recall_at_k": 0.5,
+        "by_language": {
+          "en": 0.375,
+          "zh": 0.375
+        },
+        "by_paper": {
+          "bert": 0.0,
+          "transformer": 0.75
+        }
+      },
+      "rows": [
+        {
+          "id": "bert-base-params-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "How many total parameters does BERT BASE have?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00839191599516198,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 0.8550986051559448,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "3da334f1657129d0",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8483414649963379,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b4d32d15ee20b93a",
+              "page": 16,
+              "kind": "text",
+              "score": 0.8471964597702026,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "bert-base-params-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "BERT BASE 的总参数量是多少？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.008024292008485645,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "23646e6a1a65d64e",
+              "page": 13,
+              "kind": "text",
+              "score": 0.8532903790473938,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "0c55f91a47b6baff",
+              "page": 15,
+              "kind": "table",
+              "score": 0.846289873123169,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "d359d0e80194658b",
+              "page": 15,
+              "kind": "table",
+              "score": 0.846289873123169,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "bert-mask-rate-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "What percentage of WordPiece tokens does BERT mask in each sequence?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.007448833028320223,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "8fcf0b42b8838a57",
+              "page": 4,
+              "kind": "text",
+              "score": 0.8573075532913208,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "3da334f1657129d0",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8466152548789978,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "7e409a9b0de50a28",
+              "page": 14,
+              "kind": "text",
+              "score": 0.8444015979766846,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "bert-mask-rate-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "BERT 在每个序列中随机遮蔽多少比例的 WordPiece token？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.007271457987371832,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "0c55f91a47b6baff",
+              "page": 15,
+              "kind": "table",
+              "score": 0.8634365200996399,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "d359d0e80194658b",
+              "page": 15,
+              "kind": "table",
+              "score": 0.8634365200996399,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "23646e6a1a65d64e",
+              "page": 13,
+              "kind": "text",
+              "score": 0.8502894639968872,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "bert-base-mrpc-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "In Table 1, what MRPC F1 score does BERT BASE achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.007228458009194583,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "85464a410d358dba",
+              "page": 6,
+              "kind": "text",
+              "score": 0.8646738529205322,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "194b94c761e82453",
+              "page": 6,
+              "kind": "text",
+              "score": 0.8534172773361206,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "eb976e10aa1416df",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8510299324989319,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "bert-base-mrpc-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "表 1 中 BERT BASE 的 MRPC F1 分数是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.0074954580049961805,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "0c55f91a47b6baff",
+              "page": 15,
+              "kind": "table",
+              "score": 0.8597081899642944,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "d359d0e80194658b",
+              "page": 15,
+              "kind": "table",
+              "score": 0.8597081899642944,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "23646e6a1a65d64e",
+              "page": 13,
+              "kind": "text",
+              "score": 0.8538351655006409,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "bert-large-rte-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "In Table 1, what RTE accuracy does BERT LARGE achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.009084499964956194,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "3da334f1657129d0",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8722129464149475,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 0.8716727495193481,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "c3a03aaa67c71e3f",
+              "page": 9,
+              "kind": "text",
+              "score": 0.858228325843811,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "bert-large-rte-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "表 1 中 BERT LARGE 的 RTE 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.009026249987073243,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 0.8697110414505005,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "0c55f91a47b6baff",
+              "page": 15,
+              "kind": "table",
+              "score": 0.8669143915176392,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "d359d0e80194658b",
+              "page": 15,
+              "kind": "table",
+              "score": 0.8669143915176392,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "bert-unanswerable",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.008695708005689085,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "5721498ea79b8e69",
+              "page": 13,
+              "kind": "text",
+              "score": 0.8194471597671509,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 0.8142188787460327,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "1f36d48fec398785",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8101394176483154,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "transformer-encoder-layers-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "How many identical layers are in the Transformer encoder stack?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0054891250329092145,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "f096e4ba4f5137b3",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8846083283424377,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 0.8656477928161621,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "7737556b6a9bdb52",
+              "page": 3,
+              "kind": "text",
+              "score": 0.8642393946647644,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "transformer-encoder-layers-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "Transformer 编码器由多少个相同层组成？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004981125006452203,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 0.8366373777389526,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "6c1ba7ce6a1ee8e6",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8342996835708618,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "f096e4ba4f5137b3",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8332875967025757,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "transformer-optimizer-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "Which optimizer is used to train the Transformer?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004824417002964765,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 0.8637571334838867,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "6c1ba7ce6a1ee8e6",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8615872859954834,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "9f423268888f29e5",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8604896664619446,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "transformer-optimizer-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "Transformer 训练使用哪种优化器？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004842250025831163,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "9f423268888f29e5",
+              "page": 2,
+              "kind": "text",
+              "score": 0.8463369607925415,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 0.8461918830871582,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "6c1ba7ce6a1ee8e6",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8458888530731201,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "transformer-base-ende-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "In Table 2, what EN-DE BLEU does the Transformer base model achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005030625034123659,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6c1ba7ce6a1ee8e6",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8721030950546265,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "9c74e9c7f2e70bd4",
+              "page": 8,
+              "kind": "text",
+              "score": 0.8671881556510925,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 0.8663533926010132,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "transformer-base-ende-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "表 2 中 Transformer base model 的英德翻译 BLEU 是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.004986582964193076,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 0.8939406275749207,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 0.8893232345581055,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "9c74e9c7f2e70bd4",
+              "page": 8,
+              "kind": "text",
+              "score": 0.8872517347335815,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "transformer-big-enfr-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "In Table 2, what EN-FR BLEU does Transformer big achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.0049931659596040845,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "9c74e9c7f2e70bd4",
+              "page": 8,
+              "kind": "text",
+              "score": 0.8882325887680054,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "6c1ba7ce6a1ee8e6",
+              "page": 1,
+              "kind": "text",
+              "score": 0.8742411732673645,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 0.8716599941253662,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "transformer-big-enfr-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "表 2 中 Transformer big 的英法翻译 BLEU 是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005445124988909811,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 0.891810953617096,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 0.87966388463974,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "9c74e9c7f2e70bd4",
+              "page": 8,
+              "kind": "text",
+              "score": 0.8787494897842407,
+              "score_kind": "cosine"
+            }
+          ]
+        },
+        {
+          "id": "transformer-unanswerable",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004923375032376498,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "b460abfe9ca3e629",
+              "page": 7,
+              "kind": "text",
+              "score": 0.8254220485687256,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "6c1ba7ce6a1ee8e6",
+              "page": 1,
+              "kind": "text",
+              "score": 0.820014476776123,
+              "score_kind": "cosine"
+            },
+            {
+              "chunk_id": "5298060eb322852e",
+              "page": 6,
+              "kind": "text",
+              "score": 0.8187159299850464,
+              "score_kind": "cosine"
+            }
+          ]
+        }
+      ]
+    },
+    "hybrid": {
+      "summary": {
+        "answerable_queries": 16,
+        "source_available_queries": 16,
+        "table_queries": 8,
+        "bound_cell_available_queries": 8,
+        "evidence_recall_at_k": 0.75,
+        "bound_cell_recall_at_k": 0.875,
+        "by_language": {
+          "en": 0.875,
+          "zh": 0.625
+        },
+        "by_paper": {
+          "bert": 0.75,
+          "transformer": 0.75
+        }
+      },
+      "rows": [
+        {
+          "id": "bert-base-params-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "How many total parameters does BERT BASE have?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0084267079946585,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "fb6352147d7a5c44",
+              "page": 3,
+              "kind": "text",
+              "score": 0.032018442622950824,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9fc6cccf1d276593",
+              "page": 8,
+              "kind": "text",
+              "score": 0.0315136476426799,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 0.031099324975891997,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "bert-base-params-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "BERT BASE 的总参数量是多少？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.007400625036098063,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 0.032018442622950824,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "fb6352147d7a5c44",
+              "page": 3,
+              "kind": "text",
+              "score": 0.030330882352941176,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9fc6cccf1d276593",
+              "page": 8,
+              "kind": "text",
+              "score": 0.02946912242686891,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "bert-mask-rate-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "What percentage of WordPiece tokens does BERT mask in each sequence?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.007379334012512118,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "8fcf0b42b8838a57",
+              "page": 4,
+              "kind": "text",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "7d50026550dba7a0",
+              "page": 4,
+              "kind": "text",
+              "score": 0.030679156908665108,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b705f6debbc6ff9c",
+              "page": 9,
+              "kind": "text",
+              "score": 0.029513888888888888,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "bert-mask-rate-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "BERT 在每个序列中随机遮蔽多少比例的 WordPiece token？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.00864466599887237,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "b705f6debbc6ff9c",
+              "page": 9,
+              "kind": "text",
+              "score": 0.030117753623188408,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "7e409a9b0de50a28",
+              "page": 14,
+              "kind": "text",
+              "score": 0.029850746268656716,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "8fcf0b42b8838a57",
+              "page": 4,
+              "kind": "text",
+              "score": 0.029551337359792925,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "bert-base-mrpc-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "In Table 1, what MRPC F1 score does BERT BASE achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.008476875023916364,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "eb976e10aa1416df",
+              "page": 7,
+              "kind": "text",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "194b94c761e82453",
+              "page": 6,
+              "kind": "text",
+              "score": 0.031754032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "50f321b715d46ecb",
+              "page": 6,
+              "kind": "table",
+              "score": 0.031754032258064516,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "bert-base-mrpc-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "表 1 中 BERT BASE 的 MRPC F1 分数是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.00836654199520126,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "194b94c761e82453",
+              "page": 6,
+              "kind": "text",
+              "score": 0.032018442622950824,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "eb976e10aa1416df",
+              "page": 7,
+              "kind": "text",
+              "score": 0.031054405392392875,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "50f321b715d46ecb",
+              "page": 6,
+              "kind": "table",
+              "score": 0.031009615384615385,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "bert-large-rte-en",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "In Table 1, what RTE accuracy does BERT LARGE achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.009137499961070716,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 0.03225806451612903,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "50f321b715d46ecb",
+              "page": 6,
+              "kind": "table",
+              "score": 0.030798389007344232,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9fc6cccf1d276593",
+              "page": 8,
+              "kind": "text",
+              "score": 0.03055037313432836,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "bert-large-rte-zh",
+          "paper_id": "bert",
+          "language": "zh",
+          "question": "表 1 中 BERT LARGE 的 RTE 准确率是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": 0.0,
+          "query_seconds": 0.008995499985758215,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "6ae38c902946174b",
+              "page": 6,
+              "kind": "text",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "0c55f91a47b6baff",
+              "page": 15,
+              "kind": "table",
+              "score": 0.031054405392392875,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "d359d0e80194658b",
+              "page": 15,
+              "kind": "table",
+              "score": 0.03057889822595705,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "bert-unanswerable",
+          "paper_id": "bert",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.008911916986107826,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "5721498ea79b8e69",
+              "page": 13,
+              "kind": "text",
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "db77f4cc0e4a6148",
+              "page": 9,
+              "kind": "text",
+              "score": 0.030536130536130537,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "a11dce79bf01608c",
+              "page": 3,
+              "kind": "text",
+              "score": 0.03021353930031804,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "transformer-encoder-layers-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "How many identical layers are in the Transformer encoder stack?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.0053002090426161885,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "f096e4ba4f5137b3",
+              "page": 2,
+              "kind": "text",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "7737556b6a9bdb52",
+              "page": 3,
+              "kind": "text",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 0.031054405392392875,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "transformer-encoder-layers-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "Transformer 编码器由多少个相同层组成？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004996250034309924,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9f423268888f29e5",
+              "page": 2,
+              "kind": "text",
+              "score": 0.0315136476426799,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "f096e4ba4f5137b3",
+              "page": 2,
+              "kind": "text",
+              "score": 0.03125763125763126,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "transformer-optimizer-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "Which optimizer is used to train the Transformer?",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005095832981169224,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "6c1ba7ce6a1ee8e6",
+              "page": 1,
+              "kind": "text",
+              "score": 0.0315136476426799,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "582dab28a89ad7f8",
+              "page": 8,
+              "kind": "text",
+              "score": 0.03149801587301587,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "transformer-optimizer-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "Transformer 训练使用哪种优化器？",
+          "answerable": true,
+          "kind": "text",
+          "source_available": true,
+          "bound_cell_available": null,
+          "evidence_recall": 0.0,
+          "bound_cell_recall": null,
+          "query_seconds": 0.004730166052468121,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "9f423268888f29e5",
+              "page": 2,
+              "kind": "text",
+              "score": 0.03252247488101534,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "b64b4730e4d70daa",
+              "page": 9,
+              "kind": "text",
+              "score": 0.03200204813108039,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 0.03177805800756621,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "transformer-base-ende-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "In Table 2, what EN-DE BLEU does the Transformer base model achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005085040989797562,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9c74e9c7f2e70bd4",
+              "page": 8,
+              "kind": "text",
+              "score": 0.031754032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "6c1ba7ce6a1ee8e6",
+              "page": 1,
+              "kind": "text",
+              "score": 0.031544957774465976,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "transformer-base-ende-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "表 2 中 Transformer base model 的英德翻译 BLEU 是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005312042019795626,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 0.03225806451612903,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9c74e9c7f2e70bd4",
+              "page": 8,
+              "kind": "text",
+              "score": 0.03125763125763126,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "transformer-big-enfr-en",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "In Table 2, what EN-FR BLEU does Transformer big achieve?",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.0050049580167979,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9c74e9c7f2e70bd4",
+              "page": 8,
+              "kind": "text",
+              "score": 0.032266458495966696,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 0.031754032258064516,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "transformer-big-enfr-zh",
+          "paper_id": "transformer",
+          "language": "zh",
+          "question": "表 2 中 Transformer big 的英法翻译 BLEU 是多少？",
+          "answerable": true,
+          "kind": "table",
+          "source_available": true,
+          "bound_cell_available": true,
+          "evidence_recall": 1.0,
+          "bound_cell_recall": 1.0,
+          "query_seconds": 0.005399791989475489,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 0.03278688524590164,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9c02c5cd3149a9fd",
+              "page": 8,
+              "kind": "table",
+              "score": 0.03225806451612903,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "9c74e9c7f2e70bd4",
+              "page": 8,
+              "kind": "text",
+              "score": 0.031746031746031744,
+              "score_kind": "rrf"
+            }
+          ]
+        },
+        {
+          "id": "transformer-unanswerable",
+          "paper_id": "transformer",
+          "language": "en",
+          "question": "Which AES key length is used to encrypt the training data?",
+          "answerable": false,
+          "kind": "unanswerable-probe",
+          "source_available": null,
+          "bound_cell_available": null,
+          "evidence_recall": null,
+          "bound_cell_recall": null,
+          "query_seconds": 0.005286333034746349,
+          "candidate_count": 3,
+          "hits": [
+            {
+              "chunk_id": "b460abfe9ca3e629",
+              "page": 7,
+              "kind": "text",
+              "score": 0.03177805800756621,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "dc6295b37e930bd0",
+              "page": 8,
+              "kind": "text",
+              "score": 0.031754032258064516,
+              "score_kind": "rrf"
+            },
+            {
+              "chunk_id": "5298060eb322852e",
+              "page": 6,
+              "kind": "text",
+              "score": 0.03149801587301587,
+              "score_kind": "rrf"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "limitations": "Small agent-authored annotations without independent human review. Eight independent facts, not sixteen independent samples. Parser changes were guided by these failures, so this is not a held-out result or a causal module ablation. Evidence recall does not measure semantic answer support or calibrated abstention."
+}

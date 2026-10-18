@@ -2,6 +2,8 @@
 import hashlib
 import json
 import re
+import tempfile
+import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -38,6 +40,42 @@ def verified_pdf(path, expected_sha256):
     if hashlib.sha256(data).hexdigest() != expected_sha256:
         raise ValueError(f"Document hash changed: {Path(path).name}")
     return data
+
+
+def download_paper(item, directory):
+    """Download only on an explicit user action; never replace with unverified bytes."""
+    stem = item['id']
+    url = urlparse(item['pdf_url'])
+    if not re.fullmatch(r'[a-z0-9][a-z0-9_-]*',stem) or url.scheme!='https' or not url.hostname or url.username or url.password:
+        raise ValueError('Invalid paper ID or source URL')
+    directory = Path(directory)
+    path = directory / (stem+'.pdf')
+    if path.exists():
+        try:
+            verified_pdf(path,item['sha256'])
+        except ValueError:
+            pass
+        else:
+            return path
+    with urllib.request.urlopen(item['pdf_url'],timeout=30) as response:
+        if urlparse(response.geturl()).scheme!='https':
+            raise ValueError('Publisher redirected to a non-HTTPS URL')
+        data = response.read(30*1024*1024+1)
+    if len(data)>30*1024*1024 or not data.startswith(b'%PDF-'):
+        raise ValueError('Unexpected PDF response')
+    if hashlib.sha256(data).hexdigest()!=item['sha256']:
+        raise ValueError(f'Publisher file changed: {stem}. Review annotations before updating the manifest.')
+    directory.mkdir(parents=True,exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(dir=directory,suffix='.download',delete=False) as output:
+            temporary = Path(output.name)
+            output.write(data)
+        temporary.replace(path)
+    finally:
+        if temporary is not None and temporary.exists():
+            temporary.unlink()
+    return path
 
 
 def local_examples(root):
